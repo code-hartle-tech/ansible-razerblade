@@ -12,5 +12,5 @@
 
 - name: Copy Alacritty configuration
   ansible.builtin.copy:
-    src: ../assets/alacritty.yml
+    src: alacritty.yml
     dest: "{{ logged_user_home }}/.config/alacritty/"

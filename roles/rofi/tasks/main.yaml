@@ -1,0 +1,24 @@
+---
+- name: Install rofi
+  ansible.builtin.package:
+    name: rofi
+    state: present
+
+- name: Create Rofi config directory
+  file:
+    path: "{{ logged_user_home }}/.config/rofi"
+    state: directory
+    mode: '0755'
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Copy Rofi configuration
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  loop:
+    - { src: config.rasi, dest: "{{ logged_user_home }}/.config/rofi/config.rasi" }
+    - { src: search.svg, dest: "{{ logged_user_home }}/.config/rofi/search.svg" }

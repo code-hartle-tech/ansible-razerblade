@@ -6,7 +6,9 @@
     - packages
     - ssh
     - zsh
-    - i3
     - alacritty
+    - feh
     - picom
+    - rofi
+    - i3
     - tweaks

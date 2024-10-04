@@ -62,7 +62,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Launch Rofi Application Launcher
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/config.rasi
 
 # Toggle Fullscreen
 bindsym $mod+f fullscreen toggle

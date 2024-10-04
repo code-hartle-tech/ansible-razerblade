@@ -1,0 +1,104 @@
+/*******************************************************************************
+ * DARK CYBERPUNK THEME FOR ROFI
+ * User                 : hartle-tech               
+ * Theme Repo           : https://github.com/code-hartle-tech/ansible-razerblade
+ *******************************************************************************/
+
+* {
+    font:   "Montserrat 12";
+
+    bg0:    #0f0f14ee;
+    bg1:    #1f1f1f33;
+    bg2:    #cb1dcd77;
+
+    fg0:    #ddffaaff;
+    fg1:    #fdf500ff;
+    fg2:    #ffffffff;
+    fg3:    #fd80ffff;
+    fg4:    #37ebf3ff;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+    color: #ffffffff;
+
+    margin:     0;
+    spacing:    0;
+    border:     0;
+}
+
+window {
+    background-color:   @bg0;
+    location:       center;
+    width:          640;
+    border-radius: 10px;
+    border: 6px;
+    border-color: #00000022;
+    padding: 10px;
+}
+
+
+
+inputbar {
+    font:       "Montserrat 20";
+    padding:    12px;
+    spacing:    12px;
+    children:   [ icon-search, entry ];
+}
+
+icon-search {
+    expand:     false;
+    filename:   "~/.config/rofi/search.svg";
+    size:       28px;
+}
+
+icon-search, entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+entry {
+    font:   inherit;
+    font-weight: bold;
+    placeholder         : "Search";
+    placeholder-color   : @fg4;
+}
+
+message {
+    border:             2px 0 0;
+    border-color:       red;
+    background-color:   red;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    lines:      10;
+    columns:    1;
+    fixed-height:   false;
+    border:         1px 0 0;
+    border-color:   #00000000;
+}
+
+element {
+    padding:            8px 16px;
+    spacing:            16px;
+    background-color:   #00000022;
+    border-radius: 10px;
+}
+
+element selected normal, element selected active {
+    background-color:   @fg1;
+}
+
+element-icon {
+    size:   1em;
+}
+
+element-text {
+    text-color: @fg3;
+}
+
+element-text selected normal, element selected active {
+    color: black;
+}

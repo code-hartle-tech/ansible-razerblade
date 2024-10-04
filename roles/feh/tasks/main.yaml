@@ -1,0 +1,23 @@
+---
+- name: Install Feh
+  ansible.builtin.package:
+    name: feh
+    state: present
+
+- name: Create wallpapers directory
+  file:
+    path: "{{ logged_user_home }}/Pictures/Wallpapers"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+    state: directory
+
+# copy wallpaper from assets
+- name: Copy theme wallpaper
+  copy:
+    src: "wallpaper.jpg"
+    dest: "{{ logged_user_home }}/Pictures/Wallpapers/wallpaper.jpg"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+    mode: "0755"
+ 

@@ -20,6 +20,10 @@ essentials:
   - util-linux           # Collection of essential system utilities like fdisk, mount
   - xsel                 # Command-line tool to access and manipulate the X selection (clipboard)
 
+utility:
+  - scrot               # Tool for taking screenshots
+  - grabc               # Tool for color picking
+
 network:
   - curl                # Tool for making network requests (supports various protocols)
   - dnsutils            # Tools like dig and nslookup for DNS queries
@@ -69,6 +73,8 @@ development:
   - npm                          # Node.js package manager
   - python3                      # Python programming language interpreter
   - python3-pip                  # Python package manager (pip) for Python 3
+  - python3-setuptools           # Python setuptools package
+  - python3-wheel                # Python wheel package
   - ruby                         # Ruby programming language interpreter
   - ruby-dev                     # Ruby development libraries needed for compiling native gems
   - rustc                        # Compiler for the Rust programming language
