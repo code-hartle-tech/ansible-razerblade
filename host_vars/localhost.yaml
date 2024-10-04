@@ -12,13 +12,13 @@ essentials:
   - gnupg                # Tool for secure communication and signing data
   - lightdm              # Lightweight display manager for managing user sessions and login screens
   - locales              # Manages system language and regional settings
+  - neofetch             # CLI system information tool 
   - procps               # Utilities to monitor system processes (e.g., ps, top)
   - pulseaudio-utils     # Utilities for PulseAudio sound server
   - sudo                 # Allows non-root users to run commands with root privileges
   - tzdata               # Timezone data for setting the system's time zone
   - util-linux           # Collection of essential system utilities like fdisk, mount
   - xsel                 # Command-line tool to access and manipulate the X selection (clipboard)
-  - neofetch             # CLI system information tool 
 
 network:
   - curl                # Tool for making network requests (supports various protocols)
