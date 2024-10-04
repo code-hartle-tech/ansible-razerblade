@@ -1,0 +1,45 @@
+---
+- name: Update and upgrade packages
+  ansible.builtin.package:
+    update_cache: true
+    upgrade: dist
+
+- name: Install essentials
+  ansible.builtin.package:
+    name: "{{ essentials }}"
+    state: present
+
+- name: Install network
+  ansible.builtin.package:
+    name: "{{ network }}"
+    state: present
+
+- name: Install development
+  ansible.builtin.package:
+    name: "{{ development }}"
+    state: present
+
+- name: Install editor
+  ansible.builtin.package:
+    name: "{{ editor }}"
+    state: present
+
+- name: Install security
+  ansible.builtin.package:
+    name: "{{ security }}"
+    state: present
+
+- name: Install hacking
+  ansible.builtin.package:
+    name: "{{ hacking }}"
+    state: present
+
+- name: Install drivers
+  ansible.builtin.package:
+    name: "{{ drivers }}"
+    state: present
+
+- name: Remove useless packages
+  ansible.builtin.package:
+    name: "{{ useless }}"
+    state: absent

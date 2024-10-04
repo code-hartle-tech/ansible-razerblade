@@ -1,0 +1,23 @@
+---
+- name: Clone Prezto repository
+  ansible.builtin.git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: "/home/{{ logged_user }}/.zprezto"
+    version: master
+    update: false
+
+- name: Create Zsh configuration
+  ansible.builtin.shell: |
+    setopt EXTENDED_GLOB
+    for rcfile in "{{ logged_user_home }}"/.zprezto/runcoms/^README.md(.N); do
+      ln -s "$rcfile" "{{ logged_user_home }}/.${rcfile:t}"
+    done
+  args:
+    creates: "{{ logged_user_home }}/.zshrc"
+    executable: /usr/bin/zsh
+
+- name: Change Zsh theme to pure
+  ansible.builtin.replace:
+    path: "{{ logged_user_home }}/.zpreztorc"
+    regexp: "theme 'sorin'"
+    replace: "theme 'pure'"

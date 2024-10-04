@@ -1,0 +1,8 @@
+---
+- name: Configure SSH settings
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?permitRootLogin"
+    line: "PermitRootLogin no"
+    state: present
+  notify: Restart SSH

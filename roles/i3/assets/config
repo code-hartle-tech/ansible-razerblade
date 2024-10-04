@@ -1,0 +1,166 @@
+# ----------------------------------- Set Mod Key and Font
+
+set $mod Mod4
+font pango:JetBrains Mono 12
+
+# ----------------------------------- Gaps and Borders
+
+gaps inner 20
+gaps outer 25
+#smart_borders off
+for_window [class=".*"] border pixel 0
+
+# ----------------------------------- Define Cyberpunk Color Scheme
+
+set $black                #020314
+set $neon-yellow          #fdf500
+set $neon-cyan            #1ac5b0
+set $neon-magenta         #e455ae
+set $neon-pink            #cb1dcd
+set $neon-blue            #37ebf3
+set $neon-green           #d1c5c0
+set $neon-red             #710000
+set $inactive-bg          #1a1a1a
+set $inactive-text        #555555
+set $focused-border-color #800080
+
+# ----------------------------------- Window Colors
+
+client.focused          $focused-border-color $black $neon-yellow $focused-border-color $focused-border-color
+client.focused_inactive $inactive-bg $black $inactive-text $black $inactive-text
+client.unfocused        $inactive-bg $black $inactive-text $black $inactive-text
+client.urgent           $neon-magenta $black $neon-magenta $neon-magenta $neon-magenta
+client.background       $black
+
+# ----------------------------------- i3bar Configuration
+
+bar {
+    # status_command i3status
+    i3bar_command i3bar --transparency
+    # status_command exec /home/vz/.config/i3status/mybar.sh
+    position bottom
+    font pango:JetBrains Mono 10
+    separator_symbol ·
+    hidden_state hide
+    colors {
+        background #00000000
+        statusline $black
+        separator  $neon-cyan
+
+        focused_workspace  #00000000 #00000000 #FFFFFF
+        inactive_workspace $inactive-bg $black $inactive-text
+        urgent_workspace   $black $black $black
+    }
+}
+
+# ----------------------------------- Keybindings
+
+# Launch Alacritty Terminal
+bindsym $mod+Return exec alacritty
+
+# Close Focused Window
+bindsym $mod+Shift+q kill
+
+# Launch Rofi Application Launcher
+bindsym $mod+d exec rofi -show drun
+
+# Toggle Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Window Navigation
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move Windows with Arrow Keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Resize Windows
+bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
+
+# Reload and Exit i3
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exit
+
+# Toggle i3bar Visibility
+bindsym $mod+b bar mode toggle
+
+# Screenshot
+bindsym $mod+p exec scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png
+
+# Workspace Management
+# Define Workspaces with Icons (requires font with icons, e.g., Font Awesome)
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+set $ws8 "8: "
+set $ws9 "9: "
+set $ws10 "10: "
+
+# Switch to Workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move Focused Window to Workspace and Switch
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+# Additional Keybindings
+# Launch File Manager (Nemo)
+bindsym $mod+Shift+f exec nemo
+
+# Launch Browser (Firefox)
+bindsym $mod+Shift+b exec firefox
+
+# Lock Screen (Requires i3lock)
+bindsym $mod+Shift+Escape exec i3lock -c 000000
+
+# Audio Controls (Requires pulseaudio-utils)
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioMute exec pamixer -t
+
+# Brightness Controls (Requires brightnessctl)
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+
+# ----------------------------------- Startup Applications
+
+# Launch Picom with Animation and Transparency Config
+exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf
+
+# Set Wallpaper with Feh
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
+
+# Network Manager Applet
+exec_always --no-startup-id nm-applet
+
+# Volume Icon
+exec_always --no-startup-id volumeicon

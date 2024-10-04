@@ -1,0 +1,6 @@
+---
+- name: Add ~/.local/bin to PATH
+  lineinfile:
+    path: "{{ logged_user_home }}/.zshrc"
+    line: 'export PATH="$PATH:{{ logged_user_home }}/.local/bin"'
+    insertafter: EOF

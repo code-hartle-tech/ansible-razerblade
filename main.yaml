@@ -1,0 +1,12 @@
+---
+- name: Basic Linux Setup
+  hosts: local
+  become: true
+  roles:
+    - packages
+    - ssh
+    - zsh
+    - i3
+    - alacritty
+    - picom
+    - tweaks

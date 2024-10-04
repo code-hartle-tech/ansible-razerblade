@@ -1,0 +1,9 @@
+---
+- name: Set up Zsh
+  ansible.builtin.import_tasks: zsh.yaml
+
+- name: Set up Prezto
+  ansible.builtin.import_tasks: prezto.yaml
+
+- name: Set up autosuggestions
+  ansible.builtin.import_tasks: zsh-autosuggestions.yaml

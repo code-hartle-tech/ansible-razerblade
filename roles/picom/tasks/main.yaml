@@ -1,0 +1,14 @@
+---
+- name: Create Picom config directory
+  file:
+    path: "{{ logged_user_home }}/.config/picom"
+    state: directory
+    mode: '0755'
+
+- name: Copy Picom configuration
+  ansible.builtin.copy:
+    src: ../assets/picom.conf
+    dest: "{{ logged_user_home }}/.config/picom/picom.conf"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user}}"

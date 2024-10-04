@@ -1,0 +1,15 @@
+---
+- name: Download zsh-autosuggestions
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ logged_user_home }}/.zsh/zsh-autosuggestions/"
+    version: master
+    update: false
+
+- name: Enable zsh-autosuggestions in .zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ logged_user_home }}/.zshrc"
+    line: "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    create: true
+    mode: "0644"
+    state: present

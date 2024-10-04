@@ -1,0 +1,16 @@
+---
+- name: Install Alacritty
+  ansible.builtin.package:
+    name: alacritty
+    state: present
+
+- name: Create Alacritty config directory
+  file:
+    path: "{{ logged_user_home }}/.config/alacritty"
+    state: directory
+    mode: '0755'
+
+- name: Copy Alacritty configuration
+  ansible.builtin.copy:
+    src: ../assets/alacritty.yml
+    dest: "{{ logged_user_home }}/.config/alacritty/"

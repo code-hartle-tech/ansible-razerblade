@@ -1,0 +1,97 @@
+
+---
+# Install dependencies for i3-gaps
+- name: Install i3-gaps dependencies
+  apt:
+    name:
+      - meson
+      - ninja-build
+      - libxcb-keysyms1-dev
+      - libpango1.0-dev
+      - libxcb-util0-dev
+      - libxcb-icccm4-dev
+      - libyajl-dev
+      - libstartup-notification0-dev
+      - libxcb-randr0-dev
+      - libev-dev
+      - libxcb-cursor-dev
+      - libxcb-xinerama0-dev
+      - libxcb-xkb-dev
+      - libxkbcommon-dev
+      - libxkbcommon-x11-dev
+      - libxcb-xrm-dev
+      - libxcb-shape0-dev
+      - gcc
+      - make
+      - git
+      - rofi
+      - picom
+      - feh
+      - alacritty
+      - fonts-jetbrains-mono
+      - i3lock
+      - pulseaudio-utils
+      - brightnessctl
+      - scrot
+      - i3status
+    state: present
+
+# create directories
+- name: Create directories
+  file:
+    path: "{{ logged_user_home }}/Pictures/Wallpapers"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+    state: directory
+
+# copy wallpaper from assets
+- name: Copy theme wallpaper
+  copy:
+    src: "../../assets/wallpaper.jpg"
+    dest: "{{ logged_user_home }}/Pictures/Wallpapers/wallpaper.jpg"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+    mode: "0755"
+ 
+# check i3 installation
+- name: Check if i3 is present
+  stat:
+    path: "{{ logged_user_home }}/.i3-gaps"
+  register: i3_gaps_dir
+
+# Clone i3-gaps repository
+- name: Clone i3-gaps repository
+  git:
+    repo: "https://github.com/Airblader/i3.git"
+    dest: "{{ logged_user_home }}/.i3-gaps"
+    version: "gaps-next"
+  when: not i3_gaps_dir.stat.exists
+
+# Build and install i3-gaps using Meson and Ninja
+- name: Build and install i3-gaps
+  shell: |
+    cd "{{ logged_user_home }}/.i3-gaps"
+    rm -rf build/
+    meson build --prefix=/usr --sysconfdir=/etc
+    ninja -C build
+    sudo ninja -C build install
+  args:
+    executable: /bin/bash
+    creates: /usr/bin/i3
+
+# Create i3 config directory
+- name: Create i3 config directory
+  file:
+    path: "{{ logged_user_home }}/.config/i3"
+    state: directory
+    mode: '0755'
+
+# Copy i3 config file
+- name: Copy i3 config file
+  ansible.builtin.copy:
+    src: ../assets/config
+    dest: "{{ logged_user_home }}/.config/i3/config"
+    mode: '0644'
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
