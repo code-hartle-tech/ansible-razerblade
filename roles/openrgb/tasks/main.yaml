@@ -1,0 +1,35 @@
+---
+- name: Check if OpenRGB is already installed
+  shell: "[ -f /usr/bin/openrgb ]"
+  register: openrgb_installed
+  changed_when: false
+  failed_when: false
+
+- name: Download OpenRGB
+  ansible.builtin.get_url:
+    url: "https://openrgb.org/releases/release_0.9/openrgb_0.9_amd64_bookworm_b5f46e3.deb"
+    dest: /tmp/openrgb.deb
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  when: openrgb_installed.rc != 0
+
+- name: Install OpenRGB
+  ansible.builtin.command: dpkg -i /tmp/openrgb.deb
+  when: openrgb_installed.rc != 0
+
+- name: Create OpenRGB profile directory
+  ansible.builtin.file:
+    path: "{{ logged_user_home }}/.config/OpenRGB"
+    state: directory
+    mode: "0700"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Copy OpenRGB Cyberfunk profile
+  ansible.builtin.copy:
+    src: Cyberfunk77.orp
+    dest: "{{ logged_user_home }}/.config/OpenRGB"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"

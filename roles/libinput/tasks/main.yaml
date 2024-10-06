@@ -1,0 +1,85 @@
+---
+- name: Ensure dependencies are installed
+  apt:
+    name:
+      - xserver-xorg-input-libinput
+      - xdotool
+      - wmctrl
+      - libinput-tools
+    state: present
+    update_cache: yes
+
+- name: Copy libinput touchpad configuration
+  ansible.builtin.copy:
+    src: 40-libinput.conf
+    dest: /etc/X11/xorg.conf.d/40-libinput.conf
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Check if libinput-gestures is present
+  stat:
+    path: "/usr/bin/libinput-gestures"
+  register: libinput_gestures_installed
+
+- name: Clone libinput-gestures repository
+  git:
+    repo: 'https://github.com/bulletmark/libinput-gestures.git'
+    dest: /tmp/libinput-gestures
+  when: not libinput_gestures_installed.stat.exists
+
+- name: Install libinput-gestures
+  shell: |
+    sudo make install
+  args:
+    chdir: /tmp/libinput-gestures
+    creates: /usr/bin/libinput-gestures
+
+- name: Add user to input group
+  user:
+    name: "{{ logged_user }}"
+    groups: input
+    append: yes
+
+- name: Copy libinput-gestures configuration file
+  copy:
+    src: libinput-gestures.conf
+    dest: /etc/libinput-gestures.conf
+    owner: "{{ logged_user }}"
+    mode: '0644'
+
+- name: Create libinput-gestures systemd service file
+  copy:
+    content: |
+      [Unit]
+      Description=Libinput Gestures Service
+      After=graphical-session.target
+
+      [Service]
+      Type=simple
+      ExecStart=/usr/bin/libinput-gestures
+      Restart=on-failure
+      User={{ logged_user }}
+      Environment=DISPLAY=:0
+
+      [Install]
+      WantedBy=default.target
+    dest: /etc/systemd/system/libinput-gestures.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload systemd to recognize new service
+  systemd:
+    daemon_reload: true
+
+- name: Enable libinput-gestures service
+  systemd:
+    name: libinput-gestures
+    enabled: yes
+
+- name: Start libinput-gestures service
+  systemd:
+    name: libinput-gestures
+    state: started
+

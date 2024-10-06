@@ -12,3 +12,5 @@
     - rofi
     - i3
     - tweaks
+    - libinput
+    - openrgb

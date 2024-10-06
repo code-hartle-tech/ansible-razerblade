@@ -19,6 +19,10 @@ essentials:
   - tzdata               # Timezone data for setting the system's time zone
   - util-linux           # Collection of essential system utilities like fdisk, mount
   - xsel                 # Command-line tool to access and manipulate the X selection (clipboard)
+  - xserver-xorg-input-synaptics
+  - xinput
+system:
+  - htop
 
 utility:
   - scrot               # Tool for taking screenshots

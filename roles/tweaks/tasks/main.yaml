@@ -4,3 +4,12 @@
     path: "{{ logged_user_home }}/.zshrc"
     line: 'export PATH="$PATH:{{ logged_user_home }}/.local/bin"'
     insertafter: EOF
+
+- name: Activate Backports to Debian stable (bookworm)
+  ansible.builtin.apt_repository:
+    repo: "deb http://deb.debian.org/debian bookworm-backports main"
+    state: present
+    update_cache: true
+  when:
+    - ansible_distribution | lower == "debian"
+    - ansible_distribution_release | lower in ["bookworm", "stable"]

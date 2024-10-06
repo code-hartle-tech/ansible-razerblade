@@ -1,3 +1,6 @@
 become_pass
 log/
 .vscode/
+main_local.yaml
+vault_pass.txt
+become_pass.yml
