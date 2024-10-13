@@ -1,7 +1,10 @@
 # ----------------------------------- Set Mod Key and Font
 
 set $mod Mod4
-font pango:JetBrains Mono 12
+set $mod1 Mod1
+set $mod2 Mod2
+set $mod3 Mod3
+font pango:JetBrains Mono 10
 
 # ----------------------------------- Gaps and Borders
 
@@ -142,6 +145,24 @@ bindsym $mod+Shift+b exec firefox
 # Lock Screen (Requires i3lock)
 bindsym $mod+Shift+Escape exec i3lock -c 000000
 
+# Extend Internal Screen via MiniDisplay Port
+bindsym $mod+$mod1+Up exec --no-startup-id ~/.local/bin/extend_display_minidp_above.sh
+bindsym $mod+$mod1+Down exec --no-startup-id ~/.local/bin/extend_display_minidp_below.sh
+bindsym $mod+$mod1+Left exec --no-startup-id ~/.local/bin/extend_display_minidp_left.sh
+bindsym $mod+$mod1+Right exec --no-startup-id ~/.local/bin/extend_display_minidp_right.sh
+
+# Extend Internal Screen via HDMI Port
+bindsym $mod+$mod1+Control+Up exec --no-startup-id ~/.local/bin/extend_display_hdmi_above.sh
+bindsym $mod+$mod1+Control+Down exec --no-startup-id ~/.local/bin/extend_display_hdmi_below.sh
+bindsym $mod+$mod1+Control+Left exec --no-startup-id ~/.local/bin/extend_display_hdmi_left.sh
+bindsym $mod+$mod1+Control+Right exec --no-startup-id ~/.local/bin/extend_display_hdmi_right.sh
+
+# Extend Internal Screen via USB HDMI Dongle Port
+bindsym $mod+$mod1+Shift+Up exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_above.sh
+bindsym $mod+$mod1+Shift+Down exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_below.sh
+bindsym $mod+$mod1+Shift+Left exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_left.sh
+bindsym $mod+$mod1+Shift+Right exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_right.sh
+
 # Audio Controls (Requires pulseaudio-utils)
 bindsym XF86AudioRaiseVolume exec pamixer -i 5
 bindsym XF86AudioLowerVolume exec pamixer -d 5
@@ -164,3 +185,6 @@ exec_always --no-startup-id nm-applet
 
 # Volume Icon
 exec_always --no-startup-id volumeicon
+
+# OpenRGB
+exec_always --no-startup-id openrgb --gui --startminimized --profile ~/.config/OpenRGB/Cyberfunk77.orp > /dev/null &

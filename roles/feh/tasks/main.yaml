@@ -19,5 +19,4 @@
     dest: "{{ logged_user_home }}/Pictures/Wallpapers/wallpaper.jpg"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
-    mode: "0755"
- 
+    mode: "0644"

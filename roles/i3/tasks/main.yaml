@@ -1,11 +1,8 @@
-
 ---
 # Install dependencies for i3-gaps
 - name: Install i3-gaps dependencies
   ansible.builtin.package:
     name:
-      - meson
-      - ninja-build
       - i3lock
       - i3status
     state: present
@@ -41,13 +38,13 @@
   file:
     path: "{{ logged_user_home }}/.config/i3"
     state: directory
-    mode: '0755'
+    mode: "0755"
 
 # Copy i3 config file
 - name: Copy i3 config file
   ansible.builtin.copy:
     src: config
     dest: "{{ logged_user_home }}/.config/i3/config"
-    mode: '0644'
+    mode: "0644"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"

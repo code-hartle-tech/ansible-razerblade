@@ -1,0 +1,210 @@
+#################################
+# File Management & Navigation
+#################################
+
+alias ll='ls -lah'                                # Long listing with human-readable file sizes
+alias la='ls -A'                                  # List all files except . and ..
+alias l='ls -CF'                                  # Classify files with type indication
+alias md='mkdir -p'                               # Create directories recursively
+alias rd='rmdir'                                  # Remove directories
+alias cpv='cp -v'                                 # Verbose copy
+alias mvv='mv -v'                                 # Verbose move
+alias rmr='rm -rf'                                # Recursive forced removal
+alias rmdirp='rmdir --ignore-fail-on-non-empty'   # Remove directories ignoring failures
+alias t='tree -C'                                 # Display directory tree with colors
+alias ..='cd ..'                                  # Go up one directory
+alias ...='cd ../..'                              # Go up two directories
+alias ....='cd ../../..'                          # Go up three directories
+alias df='df -h'                                  # Disk usage (human-readable)
+alias duh='du -h --max-depth=1'                   # Human-readable directory sizes
+alias lsd='ls -d */'                              # List only directories
+alias catf='cat ~/.bashrc ~/.zshrc'               # Show both .bashrc and .zshrc files
+
+#################################
+# System Information & Monitoring
+#################################
+
+alias cpu='lscpu'                                 # Show CPU info
+alias mem='free -m'                               # Memory info in MB
+alias topm='ps aux --sort=-%mem | head'           # Top processes by memory
+alias topc='ps aux --sort=-%cpu | head'           # Top processes by CPU
+alias ip='curl ifconfig.me'                       # Get public IP address
+alias up='uptime -p'                              # Uptime in a readable format
+alias sys='uname -a'                              # System information
+alias hist='history | grep'                       # Search command history
+alias net='ss -tuln'                              # Show network connections
+alias cls='clear'                                 # Clear the terminal screen
+alias ver='cat /etc/os-release'                   # Show system version info
+alias who='who -a'                                # Show who is logged in
+alias whoami='whoami'                             # Current user name
+alias datef='date "+%Y-%m-%d %H:%M:%S"'           # Show date in custom format
+alias ram='free -h'                               # Human-readable RAM usage
+alias space='df -h'                               # Human-readable disk usage
+alias proc='ps auxf'                              # Process tree
+
+#################################
+# Package Management
+#################################
+
+# Debian/Ubuntu-based
+alias upg='sudo apt update && sudo apt upgrade'   # Update and upgrade packages
+alias install='sudo apt install'                  # Install package
+alias remove='sudo apt remove'                    # Remove package
+alias search='apt search'                         # Search for a package
+alias clean='sudo apt autoremove && sudo apt clean' # Clean up unnecessary packages
+alias dpkglist='dpkg --get-selections'            # List all installed packages
+
+# Red Hat/CentOS-based
+alias yup='sudo yum update'                       # Update packages
+alias yinstall='sudo yum install'                 # Install package
+alias yremove='sudo yum remove'                   # Remove package
+alias yclean='sudo yum clean all'                 # Clean up yum cache
+
+# Arch-based
+alias pup='sudo pacman -Syu'                      # Update system and packages
+alias pinstall='sudo pacman -S'                   # Install package
+alias premove='sudo pacman -Rns'                  # Remove package and dependencies
+alias pclean='sudo pacman -Sc'                    # Clean package cache
+alias pkglist='pacman -Qe'                        # List explicitly installed packages
+
+#################################
+# Networking & Remote Access
+#################################
+
+alias ptest='ping -c 4 google.com'                # Ping Google with 4 packets
+alias ports='ss -tulnp'                           # Show open ports
+alias fdns='sudo systemd-resolve --flush-caches'  # Flush DNS cache
+alias sshcfg='vim ~/.ssh/config'                  # Edit SSH config with Vim
+alias sshr='sudo systemctl restart ssh'           # Restart SSH service
+alias skeygen='ssh-keygen -t rsa -b 4096'         # Generate SSH keys
+alias scurl='curl -s'                             # Silent curl
+alias wgetr='wget -r --no-parent'                 # Recursive download with wget
+alias ipinfo='ip a'                               # Show IP address information
+alias mac='ip link show'                          # Show MAC addresses
+alias traceroute='traceroute 8.8.8.8'             # Run traceroute to Google DNS
+alias sshkey='cat ~/.ssh/id_rsa.pub'              # Show SSH public key
+
+#################################
+# Docker & Kubernetes
+#################################
+
+# Docker
+alias dps='docker ps'                             # List running containers
+alias dpa='docker ps -a'                          # List all containers
+alias drm='docker rm $(docker ps -a -q)'          # Remove all stopped containers
+alias dim='docker images'                         # List Docker images
+alias drmi='docker rmi $(docker images -q)'       # Remove all Docker images
+alias dexec='docker exec -it'                     # Execute command in a running container
+alias dlogs='docker logs -f'                      # Tail logs of a container
+alias dbuild='docker build -t'                    # Build a Docker image
+alias dstop='docker stop $(docker ps -q)'         # Stop all running containers
+alias dprune='docker system prune -af'            # Remove all unused containers, images, volumes
+alias dclean='docker volume prune -f'             # Clean up Docker volumes
+
+# Kubernetes (kubectl)
+alias k='kubectl'                                 # Shorten kubectl to 'k'
+alias kall='kubectl get all --all-namespaces'     # Get everything across namespaces
+alias kns='kubectl config set-context --current --namespace=' # Set current namespace
+alias klog='kubectl logs -f'                      # Tail logs of a pod
+alias kexec='kubectl exec -it'                    # Execute a command inside a pod
+alias kapply='kubectl apply -f'                   # Apply Kubernetes configuration file
+alias kdel='kubectl delete'                       # Delete Kubernetes resources
+alias kdesc='kubectl describe'                    # Describe Kubernetes resources
+alias kscale='kubectl scale --replicas='          # Scale Kubernetes deployments
+alias kport='kubectl port-forward'                # Port forwarding from a pod
+
+#################################
+# Git & Version Control
+#################################
+
+alias gs='git status'                             # Git status
+alias ga='git add'                                # Git add
+alias gc='git commit -m'                          # Git commit with a message
+alias gco='git checkout'                          # Git checkout
+alias gd='git diff'                               # Git diff
+alias gp='git pull'                               # Git pull
+alias gph='git push'                              # Git push
+alias gl='git log --oneline --graph --decorate'   # Pretty git log with graph
+alias gcl='git clone'                             # Git clone
+alias gun='git reset --soft HEAD~1'               # Undo last commit
+alias gamend='git commit --amend'                 # Amend last commit
+alias gclean='git clean -fd'                      # Clean untracked files and directories
+alias gignore='vim .gitignore'                    # Edit .gitignore file with Vim
+alias grb='git rebase'                            # Git rebase
+alias gsta='git stash'                            # Git stash
+alias gstaap='git stash apply'                    # Apply stashed changes
+alias grlog='git reflog'                          # Git reflog (commit history)
+
+#################################
+# DevOps & CI/CD Tools
+#################################
+
+# Terraform
+alias tf='terraform'                              # Terraform shortcut
+alias tfi='terraform init'                        # Terraform initialize
+alias tfp='terraform plan'                        # Terraform plan
+alias tfa='terraform apply'                       # Terraform apply
+alias tfd='terraform destroy'                     # Terraform destroy
+alias tfout='terraform output'                    # Terraform output values
+alias tffmt='terraform fmt'                       # Terraform format code
+alias tfgraph='terraform graph'                   # Terraform graph visualization
+
+# Ansible
+alias ap='ansible-playbook'                       # Shorten ansible-playbook command
+alias ainv='ansible-inventory --list'             # List ansible inventory
+alias aping='ansible all -m ping'                 # Ping all hosts with Ansible
+alias anslog='tail -f /var/log/ansible.log'       # Tail ansible logs
+alias acfg='vim /etc/ansible/ansible.cfg'         # Edit Ansible config with Vim
+
+# Jenkins CLI
+alias jcli='java -jar /path/to/jenkins-cli.jar'   # Jenkins CLI
+alias jbuild='jcli build'                         # Trigger Jenkins build
+alias jcancel='jcli cancel'                       # Cancel Jenkins job
+
+#################################
+# System Maintenance & Utilities
+#################################
+
+alias grub='sudo update-grub'                     # Update grub bootloader
+alias reboot='sudo systemctl reboot'              # Reboot system
+alias poweroff='sudo systemctl poweroff'          # Power off system
+alias svc='sudo systemctl'                        # Manage systemd services
+alias jctl='journalctl -xe'                       # View systemd logs
+alias mem='free -h'                               # Human-readable memory usage
+alias clam='clamscan -r /home'                    # Scan home directory for viruses
+alias dux='du -sh *'                              # Disk usage for current directory
+alias uptime='uptime -p'                          # Pretty uptime display
+alias permfix='sudo chmod -R 755 .'               # Fix directory permissions recursively
+alias last='last -a'                              # Show last logged in users
+alias lsof='lsof -i'                              # List open files and network connections
+alias ccat='cat /etc/*-release'                   # Show Linux distribution info
+alias htop='htop'                                 # Interactive process viewer
+
+#################################
+# Text Processing & Searching
+#################################
+
+alias grep='grep --color=auto'                    # Grep with color highlighting
+alias findf='find . -name'                        # Find files by name
+alias less='less -R'                              # Less with ANSI color support
+alias wc='wc -l'                                  # Count lines in files
+alias xargsn='xargs -n1'                          # Execute one argument per line
+alias sedinplace='sed -i'                         # Sed in-place editing
+alias jsonp='python -m json.tool'                 # Pretty-print JSON
+alias headn='head -n'                             # Show the first n lines of a file
+alias tailn='tail -n'                             # Show the last n lines of a file
+alias sortn='sort -n'                             # Numeric sort
+
+#################################
+# Miscellaneous Aliases
+#################################
+
+alias please='sudo'                               # Quick sudo shortcut
+alias serve='python3 -m http.server 8000'         # Serve directory over HTTP
+alias ips='ip -c a'                               # Show IP addresses with color
+alias extract='tar -xzvf'                         # Extract tar.gz files
+alias weather='curl wttr.in'                      # Show weather info in terminal
+alias cl='clear'                                  # Clear terminal screen
+alias clock='watch -n 1 "date +%T"'               # Show a clock in the terminal
+alias open='xdg-open'                             # Open files using default applications
+alias lock='gnome-screensaver-command -l'         # Lock the screen

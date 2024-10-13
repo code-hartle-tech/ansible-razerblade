@@ -1,6 +1,6 @@
 ---
 - name: Add ~/.local/bin to PATH
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "{{ logged_user_home }}/.zshrc"
     line: 'export PATH="$PATH:{{ logged_user_home }}/.local/bin"'
     insertafter: EOF
@@ -13,3 +13,19 @@
   when:
     - ansible_distribution | lower == "debian"
     - ansible_distribution_release | lower in ["bookworm", "stable"]
+
+- name: Install aliases file
+  ansible.builtin.copy:
+    src: .aliases
+    dest: "{{ logged_user_home }}/.aliases"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Add aliases from a file to .zshrc
+  ansible.builtin.lineinfile:
+    path: "{{ logged_user_home }}/.zshrc"
+    line: "[ -f ~/.aliases ] && . ~/.aliases"
+    create: yes
+    state: present
+    insertafter: EOF

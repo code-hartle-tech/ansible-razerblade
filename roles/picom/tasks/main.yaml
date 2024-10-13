@@ -8,7 +8,9 @@
   file:
     path: "{{ logged_user_home }}/.config/picom"
     state: directory
-    mode: '0755'
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user}}"
 
 - name: Copy Picom configuration
   ansible.builtin.copy:

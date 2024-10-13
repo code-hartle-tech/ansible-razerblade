@@ -24,16 +24,15 @@
 
 - name: Clone libinput-gestures repository
   git:
-    repo: 'https://github.com/bulletmark/libinput-gestures.git'
+    repo: "https://github.com/bulletmark/libinput-gestures.git"
     dest: /tmp/libinput-gestures
   when: not libinput_gestures_installed.stat.exists
 
 - name: Install libinput-gestures
-  shell: |
-    sudo make install
+  ansible.builtin.command: sudo make install
   args:
     chdir: /tmp/libinput-gestures
-    creates: /usr/bin/libinput-gestures
+  when: not libinput_gestures_installed.stat.exists
 
 - name: Add user to input group
   user:
@@ -46,7 +45,7 @@
     src: libinput-gestures.conf
     dest: /etc/libinput-gestures.conf
     owner: "{{ logged_user }}"
-    mode: '0644'
+    mode: "0644"
 
 - name: Create libinput-gestures systemd service file
   copy:
@@ -67,7 +66,7 @@
     dest: /etc/systemd/system/libinput-gestures.service
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 
 - name: Reload systemd to recognize new service
   systemd:
@@ -82,4 +81,3 @@
   systemd:
     name: libinput-gestures
     state: started
-

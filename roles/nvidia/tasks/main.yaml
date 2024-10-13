@@ -1,0 +1,78 @@
+---
+- name: Check if NVIDIA driver is already installed
+  ansible.builtin.stat:
+    path: /usr/bin/nvidia-smi
+  register: nvidia_driver_installed
+
+- name: Check if NVIDIA driver installer is already downloaded
+  ansible.builtin.stat:
+    path: "/tmp/NVIDIA-Linux-x86_64-550.120.run"
+  register: nvidia_driver_file
+
+- name: Download the NVIDIA driver (if not already downloaded and not installed)
+  ansible.builtin.get_url:
+    url: "https://us.download.nvidia.com/XFree86/Linux-x86_64/550.120/NVIDIA-Linux-x86_64-550.120.run"
+    dest: "/tmp/NVIDIA-Linux-x86_64-550.120.run"
+    mode: "0755"
+  when: not nvidia_driver_file.stat.exists and not nvidia_driver_installed.stat.exists
+
+- name: Install the NVIDIA driver (if not already installed)
+  ansible.builtin.command: sh /tmp/NVIDIA-Linux-x86_64-550.120.run --silent --no-cc-version-check
+  args:
+    chdir: /tmp
+    creates: /usr/bin/nvidia-smi
+  when: not nvidia_driver_installed.stat.exists
+
+- name: Check if EnvyControl is already installed
+  ansible.builtin.stat:
+    path: /usr/bin/envycontrol
+  register: envycontrol_installed
+
+- name: Check if EnvyControl .deb package is already downloaded
+  ansible.builtin.stat:
+    path: "/tmp/python3-envycontrol_3.5.1-1_all.deb"
+  register: envycontrol_deb_file
+
+- name: Download EnvyControl .deb package (if not already downloaded and not installed)
+  ansible.builtin.get_url:
+    url: "https://github.com/bayasdev/envycontrol/releases/download/v3.5.1/python3-envycontrol_3.5.1-1_all.deb"
+    dest: "/tmp/python3-envycontrol_3.5.1-1_all.deb"
+  when: not envycontrol_deb_file.stat.exists and not envycontrol_installed.stat.exists
+
+- name: Install EnvyControl using dpkg (if not already installed)
+  ansible.builtin.command: dpkg -i /tmp/python3-envycontrol_3.5.1-1_all.deb
+  args:
+    chdir: /tmp
+  when: not envycontrol_installed.stat.exists
+  register: dpkg_output
+  ignore_errors: true
+
+- name: Ensure dependencies are installed after dpkg (if needed)
+  ansible.builtin.command: apt-get install -f -y
+  when: dpkg_output is defined and 'rc' in dpkg_output and dpkg_output.rc != 0
+
+- name: Check current graphics mode using EnvyControl
+  ansible.builtin.command: envycontrol -q
+  register: envycontrol_status
+  changed_when: false
+
+- name: Debug current graphics mode
+  ansible.builtin.debug:
+    msg: "The current graphics mode is {{ envycontrol_status.stdout }}"
+
+- name: Switch to hybrid mode using EnvyControl (if not already in hybrid mode)
+  ansible.builtin.command: envycontrol --switch hybrid
+  when: "'hybrid' not in envycontrol_status.stdout"
+
+- name: Copy screen extension scripts
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ logged_user_home }}/.local/bin/"
+    force: true
+  with_fileglob:
+    - "files/*"
+#
+# - name: Reboot the machine to apply changes
+#   ansible.builtin.reboot:
+#     msg: "Rebooting to apply NVIDIA driver and hybrid graphics changes"
+#     pre_reboot_delay: 5

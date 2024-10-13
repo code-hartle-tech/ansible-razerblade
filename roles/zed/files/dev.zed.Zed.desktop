@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Zed
+GenericName=CodeEditor
+Comment=Zed is a next-generation code editor designed for high-performance collaboration with humans and AI.
+Exec=.local/bin/zed
+Terminal=false
+Type=Application
+Categories=Development;
+Keywords=editor;code;
+Icon=hwloc

@@ -1,10 +1,14 @@
----
 all:
-  hosts:
-    localhost:
-      ansible_connection: local
+  children:
+    local:
+      hosts:
+        localhost:
+          ansible_connection: local
 
-local:
-  hosts:
-    localhost:
-      ansible_connection: local
+    vm:
+      hosts:
+        qemu:
+          ansible_connection: ssh
+          ansible_port: 2222
+          ansible_host: localhost
+          ansible_user: user

@@ -1,4 +1,14 @@
 ---
+- name: Run apt --fix-broken install to fix broken dependencies
+  command: apt --fix-broken install
+  ignore_errors: true
+  changed_when: false
+  register: fix_broken
+
+- name: Ensure all packages are configured correctly
+  command: dpkg --configure -a
+  when: fix_broken is failed
+
 - name: Update and upgrade packages
   ansible.builtin.package:
     update_cache: true

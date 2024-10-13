@@ -1,0 +1,81 @@
+---
+- name: Check if Zed installer is present
+  ansible.builtin.stat:
+    path: "{{ logged_user_home }}/.local/bin/zed"
+  register: zed_binary
+
+- name: Download Zed installer
+  ansible.builtin.get_url:
+    url: https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz
+    dest: /tmp/zed.tar.gz
+  when: not zed_binary.stat.exists
+
+- name: Extract Zed installer
+  ansible.builtin.unarchive:
+    src: /tmp/zed.tar.gz
+    dest: "{{ logged_user_home }}/.local/"
+    remote_src: true
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  when: not zed_binary.stat.exists
+
+- name: Copy Zed desktop launcher
+  ansible.builtin.copy:
+    src: dev.zed.Zed.desktop
+    dest: "{{ logged_user_home }}/.local/share/applications/dev.zed.Zed.desktop"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  when: not zed_binary.stat.exists
+
+- name: Create Zen binary symlink
+  ansible.builtin.file:
+    src: "{{ logged_user_home }}/.local/zed.app/bin/zed"
+    dest: "{{ logged_user_home }}/.local/bin/zed"
+    state: link
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  when: not zed_binary.stat.exists
+#
+# - name: Install required packages
+#   ansible.builtin.package:
+#     name:
+#       - xdg-desktop-portal
+#       - xdg-desktop-portal-gtk
+#     state: present
+#   become: true
+
+# - name: Clone xdg-desktop-portal repository
+#   git:
+#     repo: "https://github.com/flatpak/xdg-desktop-portal.git"
+#     dest: "{{ logged_user_home }}/xdg-desktop-portal/"
+#   become: false
+
+# - name: Create meson build directory
+#   ansible.builtin.file:
+#     path: "{{ logged_user_home }}/xdg-desktop-portal/build/"
+#     state: directory
+#     mode: "0755"
+#     owner: "{{ logged_user }}"
+#     group: "{{ logged_user }}"
+#   become: false
+
+# - name: Set up Meson build directory
+#   ansible.builtin.command: meson setup "{{ logged_user_home }}/xdg-desktop-portal/build/"
+#   args:
+#     chdir: "{{ logged_user_home }}/xdg-desktop-portal/"
+#   become: false
+
+# - name: Compile the project
+#   ansible.builtin.command: meson compile -C "{{ logged_user_home }}/xdg-desktop-portal/build/"
+#   args:
+#     chdir: "{{ logged_user_home }}/xdg-desktop-portal/"
+#   become: false
+
+# - name: Install the compiled project
+#   ansible.builtin.command: meson install -C "{{ logged_user_home }}/xdg-desktop-portal/build/"
+#   become: true
+#   args:
+#     chdir: "{{ logged_user_home }}/xdg-desktop-portal/"

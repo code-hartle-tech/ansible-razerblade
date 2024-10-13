@@ -5,6 +5,17 @@
   changed_when: false
   failed_when: false
 
+- name: Install OpenRGB dependencies
+  ansible.legacy.package:
+    name:
+      - libhidapi-hidraw0
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5widgets5
+      - openrazer-driver-dkms
+    state: present
+    update_cache: yes
+
 - name: Download OpenRGB
   ansible.builtin.get_url:
     url: "https://openrgb.org/releases/release_0.9/openrgb_0.9_amd64_bookworm_b5f46e3.deb"

@@ -3,135 +3,137 @@ logged_user: "{{ lookup('env', 'USER') }}"
 logged_user_home: "{{ lookup('env', 'HOME') }}"
 
 essentials:
-  - apt-transport-https  # Allows downloading packages over HTTPS
-  - brightnessctl        # Utility to adjust screen brightness
-  - ca-certificates      # SSL certificates to enable HTTPS connections
-  - coreutils            # Essential GNU utilities like ls, cat, etc.
-  - fonts-font-awesome   # Iconic font and toolkit for scalable vector icons, commonly used in web development
+  - apt-transport-https # Allows downloading packages over HTTPS
+  - brightnessctl # Utility to adjust screen brightness
+  - ca-certificates # SSL certificates to enable HTTPS connections
+  - coreutils # Essential GNU utilities like ls, cat, etc.
+  - fonts-font-awesome # Iconic font and toolkit for scalable vector icons, commonly used in web development
   - fonts-jetbrains-mono # A developer-friendly monospaced font for programming
-  - gnupg                # Tool for secure communication and signing data
-  - lightdm              # Lightweight display manager for managing user sessions and login screens
-  - locales              # Manages system language and regional settings
-  - neofetch             # CLI system information tool 
-  - procps               # Utilities to monitor system processes (e.g., ps, top)
-  - pulseaudio-utils     # Utilities for PulseAudio sound server
-  - sudo                 # Allows non-root users to run commands with root privileges
-  - tzdata               # Timezone data for setting the system's time zone
-  - util-linux           # Collection of essential system utilities like fdisk, mount
-  - xsel                 # Command-line tool to access and manipulate the X selection (clipboard)
-  - xserver-xorg-input-synaptics
-  - xinput
+  - gnupg # Tool for secure communication and signing data
+  - lightdm # Lightweight display manager for managing user sessions and login screens
+  - locales # Manages system language and regional settings
+  - neofetch # CLI system information tool
+  - procps # Utilities to monitor system processes (e.g., ps, top)
+  - pulseaudio-utils # Utilities for PulseAudio sound server
+  - sudo # Allows non-root users to run commands with root privileges
+  - tzdata # Timezone data for setting the system's time zone
+  - util-linux # Collection of essential system utilities like fdisk, mount
+  - xsel # Command-line tool to access and manipulate the X selection (clipboard)
+  - xserver-xorg-input-synaptics # driver for the synaptics touchpad input device
+  - xinput # xinput is a command-line utility for managing and configuring input devices connected to Linux systems.
+  - libinput-tools # Input device driver and utility library for Linux
 system:
-  - htop
+  - htop # htop allows system-wide process listing and management
 
 utility:
-  - scrot               # Tool for taking screenshots
-  - grabc               # Tool for color picking
+  - scrot # Tool for taking screenshots
+  - grabc # Tool for color picking
 
 network:
-  - curl                # Tool for making network requests (supports various protocols)
-  - dnsutils            # Tools like dig and nslookup for DNS queries
-  - ethtool             # Tool for querying and controlling network device driver settings
-  - iproute2            # Modern networking utilities like ip for network management
-  - iputils-ping        # Ping utility for checking network connectivity
-  - net-tools           # Older utilities like ifconfig, netstat (deprecated but useful)
-  - openssh-client      # Includes scp for secure file transfer over SSH
-  - openssh-server      # SSH server for remote login and management
+  - curl # Tool for making network requests (supports various protocols)
+  - dnsutils # Tools like dig and nslookup for DNS queries
+  - ethtool # Tool for querying and controlling network device driver settings
+  - iproute2 # Modern networking utilities like ip for network management
+  - iputils-ping # Ping utility for checking network connectivity
+  - net-tools # Older utilities like ifconfig, netstat (deprecated but useful)
+  - openssh-client # Includes scp for secure file transfer over SSH
+  - openssh-server # SSH server for remote login and management
   - openssh-sftp-server # SFTP server for secure file transfers over SSH
-  - tcpdump             # Command-line packet analyzer for network traffic monitoring
-  - traceroute          # Utility to trace the route packets take to a network host
-  - whois               # Utility for querying domain registration information
+  - tcpdump # Command-line packet analyzer for network traffic monitoring
+  - traceroute # Utility to trace the route packets take to a network host
+  - whois # Utility for querying domain registration information
+  - network-manager # Added network manager to improve system monitoring and configuration tools.
+  - network-manager-gnome # nm-applet is a simple graphical utility for managing network connections and settings.
 
 development:
-  - build-essential              # Meta-package for essential development tools (gcc, g++, make)
-  - cargo                        # Rust's package manager and build system
-  - cmake                        # Build system generator for cross-platform development
-  - default-jdk                  # Default Java Development Kit (JDK) for compiling and running Java programs
-  - g++                          # GNU Compiler Collection (C++ language)
-  - gcc                          # GNU Compiler Collection (C language)
-  - git                          # Distributed version control system
-  - libcurl4-openssl-dev         # Development files for libcurl (used for transferring data with URLs)
-  - libev-dev                    # High-performance event loop library, development files
-  - libpango1.0-dev              # Development files for Pango, a text layout library
-  - libsqlite3-dev               # Development files for SQLite3, required for building and linking against SQLite databases
+  - build-essential # Meta-package for essential development tools (gcc, g++, make)
+  - cargo # Rust's package manager and build system
+  - cmake # Build system generator for cross-platform development
+  - default-jdk # Default Java Development Kit (JDK) for compiling and running Java programs
+  - g++ # GNU Compiler Collection (C++ language)
+  - gcc # GNU Compiler Collection (C language)
+  - git # Distributed version control system
+  - libcurl4-openssl-dev # Development files for libcurl (used for transferring data with URLs)
+  - libev-dev # High-performance event loop library, development files
+  - libpango1.0-dev # Development files for Pango, a text layout library
+  - libsqlite3-dev # Development files for SQLite3, required for building and linking against SQLite databases
   - libstartup-notification0-dev # Library for startup notification, development files
-  - libxcb-cursor-dev            # Development files for XCB cursor library
-  - libxcb-icccm4-dev            # XCB ICCCM library, development files
-  - libxcb-keysyms1-dev          # XCB key symbols library, development files
-  - libxcb-randr0-dev            # Development files for XCB RandR extension
-  - libxcb-shape0-dev            # Development files for XCB shape extension
-  - libxcb-util0-dev             # Development files for XCB utility libraries
-  - libxcb-xinerama0-dev         # Development files for XCB Xinerama extension
-  - libxcb-xkb-dev               # Development files for XCB keyboard extension
-  - libxcb-xrm-dev               # Development files for XCB resource manager extension
-  - libxkbcommon-dev             # Development files for XKB common library
-  - libxkbcommon-x11-dev         # Development files for XKB common library (X11 support)
-  - libxml2                      # Library for parsing XML
-  - libxml2-dev                  # Development files for libxml2, required for building software that uses XML
-  - libxslt1-dev                 # Development files for libxslt, a library used for XSLT transformations
-  - libyajl-dev                  # Development files for Yet Another JSON Library
-  - make                         # Tool to control the build process
-  - meson                        # Build system for fast and user-friendly development
-  - ninja-build                  # Small build system focusing on speed
-  - nodejs                       # JavaScript runtime built on Chrome's V8 engine
-  - npm                          # Node.js package manager
-  - python3                      # Python programming language interpreter
-  - python3-pip                  # Python package manager (pip) for Python 3
-  - python3-setuptools           # Python setuptools package
-  - python3-wheel                # Python wheel package
-  - ruby                         # Ruby programming language interpreter
-  - ruby-dev                     # Ruby development libraries needed for compiling native gems
-  - rustc                        # Compiler for the Rust programming language
-  - pipx                         # Tool to install and run Python applications in isolated environments
-  - pipenv                       # Python virtual environment management 
-
+  - libxcb-cursor-dev # Development files for XCB cursor library
+  - libxcb-icccm4-dev # XCB ICCCM library, development files
+  - libxcb-keysyms1-dev # XCB key symbols library, development files
+  - libxcb-randr0-dev # Development files for XCB RandR extension
+  - libxcb-shape0-dev # Development files for XCB shape extension
+  - libxcb-util0-dev # Development files for XCB utility libraries
+  - libxcb-xinerama0-dev # Development files for XCB Xinerama extension
+  - libxcb-xkb-dev # Development files for XCB keyboard extension
+  - libxcb-xrm-dev # Development files for XCB resource manager extension
+  - libxkbcommon-dev # Development files for XKB common library
+  - libxkbcommon-x11-dev # Development files for XKB common library (X11 support)
+  - libxml2 # Library for parsing XML
+  - libxml2-dev # Development files for libxml2, required for building software that uses XML
+  - libxslt1-dev # Development files for libxslt, a library used for XSLT transformations
+  - libyajl-dev # Development files for Yet Another JSON Library
+  - make # Tool to control the build process
+  - meson # Build system for fast and user-friendly development
+  - ninja-build # Small build system focusing on speed
+  - nodejs # JavaScript runtime built on Chrome's V8 engine
+  - npm # Node.js package manager
+  - python3 # Python programming language interpreter
+  - python3-pip # Python package manager (pip) for Python 3
+  - python3-setuptools # Python setuptools package
+  - python3-wheel # Python wheel package
+  - ruby # Ruby programming language interpreter
+  - ruby-dev # Ruby development libraries needed for compiling native gems
+  - rustc # Compiler for the Rust programming language
+  - pipx # Tool to install and run Python applications in isolated environments
+  - pipenv # Python virtual environment management
 
 editor:
-  - imagemagick   # Command-line tool for editing and converting images
-  - libreoffice   # Open-source office suite (word processing, spreadsheets, etc.)
-  - nano          # Simple, easy-to-use text editor for beginners
-  - pandoc        # Universal document converter for Markdown, LaTeX, etc.
+  - imagemagick # Command-line tool for editing and converting images
+  - libreoffice # Open-source office suite (word processing, spreadsheets, etc.)
+  - nano # Simple, easy-to-use text editor for beginners
+  - pandoc # Universal document converter for Markdown, LaTeX, etc.
   - tesseract-ocr # Optical character recognition (OCR) engine
-  - neovim        # Modern, highly configurable text editor
+  - neovim # Modern, highly configurable text editor
 
 security:
-  - auditd     # Linux auditing system for monitoring and logging system activity
-  - clamav     # Open-source antivirus software
+  - auditd # Linux auditing system for monitoring and logging system activity
+  - clamav # Open-source antivirus software
   - cryptsetup # Utility to set up encrypted filesystems
-  - fail2ban   # Bans IPs after multiple failed login attempts (intrusion prevention)
-  - iptables   # Advanced firewall configuration tool
-  - lynis      # Security auditing tool for Unix-based systems
-  - openssl    # Essential library for SSL/TLS encryption
-  - rkhunter   # Rootkit hunter for detecting and removing rootkits
-  - ufw        # Uncomplicated firewall to easily manage firewall rules
+  - fail2ban # Bans IPs after multiple failed login attempts (intrusion prevention)
+  - iptables # Advanced firewall configuration tool
+  - lynis # Security auditing tool for Unix-based systems
+  - openssl # Essential library for SSL/TLS encryption
+  - rkhunter # Rootkit hunter for detecting and removing rootkits
+  - ufw # Uncomplicated firewall to easily manage firewall rules
 
 hacking:
-  - aircrack-ng        # Suite of tools for auditing wireless networks (WEP and WPA cracking)
-  - dirb               # Web content scanner for brute-forcing directories and files on web servers
-  - dnsrecon           # DNS enumeration tool for gathering DNS records, subdomains, and zone transfers
-  - dsniff             # Intercepts packets on a switched LAN through ARP poisoning
-  - empire             # Post-exploitation framework that uses PowerShell agents for persistent access to a target
+  - aircrack-ng # Suite of tools for auditing wireless networks (WEP and WPA cracking)
+  - dirb # Web content scanner for brute-forcing directories and files on web servers
+  - dnsrecon # DNS enumeration tool for gathering DNS records, subdomains, and zone transfers
+  - dsniff # Intercepts packets on a switched LAN through ARP poisoning
+  - empire # Post-exploitation framework that uses PowerShell agents for persistent access to a target
   - ettercap-text-only # Command-line (text-based) version of Ettercap for network sniffing and man-in-the-middle attacks
-  - gobuster           # Tool for brute-forcing URIs (directories and files) in web servers and DNS subdomains
-  - hashcat            # Advanced password recovery tool to crack hashes
-  - hydra              # Fast and flexible network login cracker
-  - john               # John the Ripper, a password cracking tool (useful for auditing password strength)
-  - medusa             # Speedy parallel, modular brute-force login tool
-  - netcat-openbsd     # Networking utility for debugging and network exploration
-  - nmap               # Network exploration and security auditing tool
-  - recon-ng           # Web reconnaissance framework written in Python
-  - sqlmap             # Automatic SQL injection and database takeover tool
-  - sslscan            # SSL/TLS scanner for identifying weak ciphers and certificate issues
-  - wfuzz              # Tool for brute-forcing web applications, discovering hidden resources and fuzzing
-  - wireshark          # Network protocol analyzer for packet capture and analysis
+  - gobuster # Tool for brute-forcing URIs (directories and files) in web servers and DNS subdomains
+  - hashcat # Advanced password recovery tool to crack hashes
+  - hydra # Fast and flexible network login cracker
+  - john # John the Ripper, a password cracking tool (useful for auditing password strength)
+  - medusa # Speedy parallel, modular brute-force login tool
+  - netcat-openbsd # Networking utility for debugging and network exploration
+  - nmap # Network exploration and security auditing tool
+  - recon-ng # Web reconnaissance framework written in Python
+  - sqlmap # Automatic SQL injection and database takeover tool
+  - sslscan # SSL/TLS scanner for identifying weak ciphers and certificate issues
+  - wfuzz # Tool for brute-forcing web applications, discovering hidden resources and fuzzing
+  - wireshark # Network protocol analyzer for packet capture and analysis
 
 drivers:
-  - libegl1-mesa-dev   # Development files for the Mesa implementation of the EGL API, used for rendering graphics
+  - libegl1-mesa-dev # Development files for the Mesa implementation of the EGL API, used for rendering graphics
 
-useless:        # Packages that are non-essential, replaceable, or potentially insecure
-  - cups        # Common Unix Printing System; not needed if no printer is connected
-  - espeak      # Text-to-speech software for accessibility; remove if not needed
+useless: # Packages that are non-essential, replaceable, or potentially insecure
+  - cups # Common Unix Printing System; not needed if no printer is connected
+  - espeak # Text-to-speech software for accessibility; remove if not needed
   - firefox-esr # Web browser; not necessary for server or headless environments
-  - ftp         # Insecure file transfer protocol (use SFTP or SCP instead)
-  - orca        # Screen reader for accessibility; remove if not needed
-  - telnet      # Insecure remote login protocol (use SSH instead)
+  - ftp # Insecure file transfer protocol (use SFTP or SCP instead)
+  - orca # Screen reader for accessibility; remove if not needed
+  - telnet # Insecure remote login protocol (use SSH instead)
