@@ -163,10 +163,13 @@ bindsym $mod+$mod1+Shift+Down exec --no-startup-id ~/.local/bin/extend_display_u
 bindsym $mod+$mod1+Shift+Left exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_left.sh
 bindsym $mod+$mod1+Shift+Right exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_right.sh
 
-# Audio Controls (Requires pulseaudio-utils)
-bindsym XF86AudioRaiseVolume exec pamixer -i 5
-bindsym XF86AudioLowerVolume exec pamixer -d 5
-bindsym XF86AudioMute exec pamixer -t
+bindsym $mod+$mod1+Control+p exec --no-startup-id ~/.local/bin/dettach_all_external_displays.sh
+
+# Audio Controls (Requires amixer)
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioMute exec amixer set Master toggle
+
 
 # Brightness Controls (Requires brightnessctl)
 bindsym XF86MonBrightnessUp exec brightnessctl s +10%
@@ -187,4 +190,4 @@ exec_always --no-startup-id nm-applet
 exec_always --no-startup-id volumeicon
 
 # OpenRGB
-exec_always --no-startup-id openrgb --gui --startminimized --profile ~/.config/OpenRGB/Cyberfunk77.orp > /dev/null &
+exec --no-startup-id openrgb --gui --startminimized --profile ~/.config/OpenRGB/Cyberfunk77.orp > /dev/null &

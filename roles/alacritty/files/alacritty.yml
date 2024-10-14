@@ -7,38 +7,38 @@ window:
 
 colors:
   primary:
-    background: '0x000000'
-    foreground: '0xd1c5c0'
+    background: "0x000000"
+    foreground: "0xd1c5c0"
 
   normal:
-    black:   '0x020314'
-    red:     '0xfdf500'
-    green:   '0xddffaa'
-    yellow:  '0xfdf500'
-    blue:    '0x37ebf3'
-    magenta: '0xe455ae'
-    cyan:    '0x1ac5b0'
-    white:   '0xffffff'
+    black: "0x020314"
+    red: "0xfdf500"
+    green: "0xddffaa"
+    yellow: "0xfdf500"
+    blue: "0x37ebf3"
+    magenta: "0xe455ae"
+    cyan: "0x1ac5b0"
+    white: "0xffffff"
 
   bright:
-    black:   '0x3a3a3a'
-    red:     '0xffff00'
-    green:   '0xeaffcc'
-    yellow:  '0xffff66'
-    blue:    '0x6efeff'
-    magenta: '0xff66d9'
-    cyan:    '0x5fffea'
-    white:   '0xffffff'
+    black: "0x3a3a3a"
+    red: "0xffff00"
+    green: "0xeaffcc"
+    yellow: "0xffff66"
+    blue: "0x6efeff"
+    magenta: "0xff66d9"
+    cyan: "0x5fffea"
+    white: "0xffffff"
 
 font:
   normal:
     family: JetBrains Mono
     style: Regular
-  size: 7
+  size: 10
 
 cursor:
-  text: '0x000000'
-  cursor: '0x000000'
+  text: "0x000000"
+  cursor: "0x000000"
 
 scrolling:
   history: 10000
@@ -50,4 +50,3 @@ bell:
 key_bindings:
   - { key: C, mods: Super, action: Copy }
   - { key: V, mods: Super, action: Paste }
-

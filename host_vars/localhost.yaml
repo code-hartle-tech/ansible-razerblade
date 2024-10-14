@@ -14,7 +14,6 @@ essentials:
   - locales # Manages system language and regional settings
   - neofetch # CLI system information tool
   - procps # Utilities to monitor system processes (e.g., ps, top)
-  - pulseaudio-utils # Utilities for PulseAudio sound server
   - sudo # Allows non-root users to run commands with root privileges
   - tzdata # Timezone data for setting the system's time zone
   - util-linux # Collection of essential system utilities like fdisk, mount
@@ -22,6 +21,8 @@ essentials:
   - xserver-xorg-input-synaptics # driver for the synaptics touchpad input device
   - xinput # xinput is a command-line utility for managing and configuring input devices connected to Linux systems.
   - libinput-tools # Input device driver and utility library for Linux
+  - inotify-tools
+
 system:
   - htop # htop allows system-wide process listing and management
 

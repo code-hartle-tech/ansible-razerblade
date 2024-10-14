@@ -1,0 +1,72 @@
+---
+# Step 1: Install PipeWire and related packages
+- name: Install PipeWire and related packages
+  ansible.builtin.package:
+    name:
+      - pipewire
+      - pipewire-alsa
+      - pipewire-audio
+      - pipewire-audio-client-libraries
+      - pipewire-bin
+      - pipewire-doc
+      - pipewire-jack
+      - pipewire-libcamera
+      - pipewire-module-xrdp
+      - pipewire-pulse
+      - pipewire-tests
+      - pipewire-v4l2
+      - wireplumber
+      - pavucontrol
+    state: present
+    update_cache: true
+
+# Step 2: Mask PulseAudio
+- name: Mask PulseAudio
+  ansible.builtin.command: systemctl --user mask pulseaudio
+  become: true
+  become_user: "{{ logged_user }}"
+
+# Step 3: Enable and start PipeWire services
+- name: Start and enable PipeWire
+  ansible.builtin.systemd:
+    name: pipewire
+    scope: user
+    enabled: true
+    state: started
+  become: true
+  become_user: "{{ logged_user }}"
+
+- name: Start and enable PipeWire Pulse
+  ansible.builtin.systemd:
+    name: pipewire-pulse
+    scope: user
+    enabled: true
+    state: started
+  become: true
+  become_user: "{{ logged_user }}"
+
+# Step 4: Install Flatpak (if not installed)
+- name: Ensure Flatpak is installed
+  ansible.builtin.package:
+    name: flatpak
+    state: present
+
+# Step 5: Add Flathub repository for Flatpak
+- name: Add Flathub repository for Flatpak
+  ansible.builtin.command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  args:
+    creates: /var/lib/flatpak/repo/flathub
+
+# Step 6: Install Helvum via Flatpak using a command
+- name: Install Helvum via Flatpak
+  ansible.builtin.command: flatpak install -y flathub org.pipewire.Helvum
+  args:
+    creates: /var/lib/flatpak/app/org.pipewire.Helvum
+
+- name: Copy Helvum .desktop file
+  ansible.builtin.copy:
+    src: Helvum.desktop
+    dest: "{{ logged_user_home }}/.local/share/applications/Helvum.desktop"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"

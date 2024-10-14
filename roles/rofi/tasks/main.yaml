@@ -8,7 +8,7 @@
   file:
     path: "{{ logged_user_home }}/.config/rofi"
     state: directory
-    mode: "0644"
+    mode: "0700"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
 

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Helvum
+Comment=Helvum is a graphical patchbay for PipeWire
+Exec=flatpak run org.pipewire.Helvum
+Terminal=false
+Type=Application
+Categories=Settings;
+Keywords=settings;sound;
+Icon=hwloc;
