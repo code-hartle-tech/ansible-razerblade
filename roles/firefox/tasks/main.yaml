@@ -1,0 +1,53 @@
+---
+- name: Create APT keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+
+- name: Ensure wget is installed
+  ansible.builtin.package:
+    name: wget
+    state: present
+
+- name: Import the Mozilla APT repository signing key
+  ansible.builtin.get_url:
+    url: https://packages.mozilla.org/apt/repo-signing-key.gpg
+    dest: /etc/apt/keyrings/packages.mozilla.org.asc
+    mode: "0644"
+
+- name: Verify the fingerprint of the Mozilla APT repository key
+  ansible.builtin.command:
+    cmd: "gpg --dry-run --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc"
+  register: gpg_fingerprint_output
+
+- name: Check for correct fingerprint
+  ansible.builtin.debug:
+    msg: "The key fingerprint matches (35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3)"
+  when: '"35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3" in gpg_fingerprint_output.stdout'
+
+- name: Add Mozilla APT repository to sources list
+  ansible.builtin.template:
+    src: mozilla.list.j2
+    dest: /etc/apt/sources.list.d/mozilla.list
+    mode: "0644"
+
+- name: Configure APT to prioritize packages from Mozilla repository
+  ansible.builtin.copy:
+    content: |
+      Package: *
+      Pin: origin packages.mozilla.org
+      Pin-Priority: 1000
+    dest: /etc/apt/preferences.d/mozilla
+    mode: "0644"
+
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Firefox
+  ansible.builtin.apt:
+    name: firefox
+    state: present
