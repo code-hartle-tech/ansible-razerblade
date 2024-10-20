@@ -22,6 +22,11 @@
 
 - name: Install network
   ansible.builtin.package:
+    name: "{{ fonts }}"
+    state: present
+
+- name: Install network
+  ansible.builtin.package:
     name: "{{ network }}"
     state: present
 

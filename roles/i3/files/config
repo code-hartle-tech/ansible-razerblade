@@ -59,16 +59,16 @@ bar {
 # ----------------------------------- Keybindings
 
 # Launch Alacritty Terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+F1 exec alacritty
 
 # Close Focused Window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # Launch Rofi Application Launcher
 bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/config.rasi
 
 # Toggle Fullscreen
-bindsym $mod+f fullscreen toggle
+bindsym F11 fullscreen toggle
 
 # Window Navigation
 bindsym $mod+Left focus left
@@ -140,13 +140,13 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Additional Keybindings
 # Launch File Manager (Nemo)
-bindsym $mod+Shift+f exec nemo
+bindsym $mod+f exec nemo
 
 # Launch Browser (Firefox)
-bindsym $mod+Shift+b exec firefox
+bindsym $mod+$mod1+b exec firefox
 
 # Lock Screen (Requires i3lock)
-bindsym $mod+Shift+Escape exec i3lock -c 000000
+bindsym $mod+$mod1+Backspace exec i3lock -c 000000
 
 # Extend Internal Screen via MiniDisplay Port
 bindsym $mod+$mod1+Up exec --no-startup-id ~/.local/bin/extend_display_minidp_above.sh
@@ -190,7 +190,10 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
 exec_always --no-startup-id nm-applet
 
 # Volume Icon
-exec_always --no-startup-id volumeicon
+exec --no-startup-id volumeicon
+
+# Bluetooth Icon
+exec_always --no-startup-id blueman-applet
 
 # OpenRGB
 exec --no-startup-id openrgb --gui --startminimized --profile ~/.config/OpenRGB/Cyberfunk77.orp > /dev/null &

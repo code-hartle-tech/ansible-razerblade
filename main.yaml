@@ -4,24 +4,23 @@
   become: true
   roles:
     - preflight
-    - packages
-    - ssh
-    - zsh
-    - alacritty
-    - feh
-    - picom
-    - rofi
+    # - packages
+    # - ssh
+    # - zsh
+    # - alacritty
+    # - feh
+    # - picom
+    # - rofi
     - i3
-    - tweaks
-    - libinput
-    - openrgb
-    - vscode
-    - nvidia
-    - ollama
-    - steam
-    - pipewire
-    - firefox
-    - modules
-    - appeditor
-    - telegram
-    - devops
+    # - tweaks
+    # - libinput
+    # - openrgb
+    # - vscode
+    # - nvidia
+    # - ollama
+    # - steam
+    # - pipewire
+    # - firefox
+    # - modules
+    # - telegram
+    # - devops

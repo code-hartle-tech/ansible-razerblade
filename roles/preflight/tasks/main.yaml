@@ -4,3 +4,9 @@
 
 - name: Rename Alfa USB Adapter interface
   ansible.builtin.include_tasks: usb_wifi.yaml
+
+- name: Set up fonts
+  ansible.builtin.include_tasks: fonts.yaml
+
+- name: Set up applets
+  ansible.builtin.include_tasks: applets.yaml

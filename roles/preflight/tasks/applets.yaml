@@ -1,0 +1,13 @@
+---
+- name: Install volumeicon
+  ansible.builtin.package:
+    name: volumeicon-alsa
+    state: present
+
+- name: Copy volumeicon config
+  ansible.builtin.copy:
+    src: volumeicon
+    dest: "{{ logged_user_home }}/.config/volumeicon/volumeicon"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"

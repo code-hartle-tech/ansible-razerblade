@@ -1,0 +1,16 @@
+{
+    "debug.console.fontFamily": "Hack, monospace",
+    "editor.fontFamily": "'Hurmit Nerd Font Mono', 'Noto Color Emoji', monospace",
+    "editor.fontSize": 15,
+    "editor.fontWeight": "normal",
+    "editor.formatOnSave": true,
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "explorer.confirmDelete": false,
+    "files.autoSave": "onFocusChange",
+    "markdown.preview.fontFamily": "Hack, 'Noto Color Emoji', monospace",
+    "terminal.integrated.fontFamily": "'ProFontWindows Nerd Font Mono', 'Noto Color Emoji', monospace",
+    "terminal.integrated.fontSize": 17,
+    "window.menuBarVisibility": "toggle",
+    "workbench.colorTheme": "Material Theme Ocean High Contrast",
+    "workbench.startupEditor": "none"
+}

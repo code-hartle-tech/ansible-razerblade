@@ -1,4 +1,4 @@
-# Ansible Setup Project
+# Ansible Setup Project 🛠️
 
 ![logo](https://img.shields.io/badge/Ansible-2.9.6-blue) ![linux](https://img.shields.io/badge/Linux-Debian-orange) ![shell](https://img.shields.io/badge/Shell-Zsh-green)
 
@@ -6,9 +6,9 @@
 
 ![Cursor Terminals](./assets/Cyberfunk77.gif)
 
-Welcome to the Ansible Setup Project! This project is designed to automate the setup of various applications and configurations on Debian-based systems using Ansible.
+Welcome to the Ansible Setup Project! This project is designed to automate the setup of various applications and configurations on Debian-based systems, specifically tailored for a 2019 Advanced Razer Blade laptop. 💻  This playbook aims to provide a smooth and efficient way to configure your system with a focus on productivity, customization, and a touch of style. ✨
 
-## 📂 Project Structure
+## 📂 Project Structure 
 
 ```plaintext
 .
@@ -71,6 +71,31 @@ Welcome to the Ansible Setup Project! This project is designed to automate the s
             └── zsh.yaml
 ```
 
+| Role | Description |
+|---|---|
+| alacritty | Configures the Alacritty terminal emulator. |
+| feh | Sets the wallpaper using the `feh` utility. |
+| i3 | Installs and configures the i3 window manager. |
+| packages | Installs essential system packages. |
+| picom | Configures the `picom` compositor for desktop effects. |
+| rofi | Configures the `rofi` window switcher and application launcher. |
+| ssh | Configures SSH for secure remote access. |
+| tweaks | Applies various system tweaks and customizations. |
+| zsh | Configures the Zsh shell with Prezto and other plugins. |
+| devops | Manages tools for DevOps workflows, including Docker, Kubernetes, and related utilities. |
+| firefox | Configures the Firefox web browser. |
+| libinput | Configures libinput for touchpad and mouse gestures. |
+| modules | Manages system modules and kernel modules. |
+| nvidia | Manages NVIDIA graphics drivers and settings. |
+| ollama | Ollama is a tool for running large language models (LLMs) on your local machine. |
+| openrgb | Configures the OpenRGB software for controlling RGB lighting. |
+| pipewire | Configures PipeWire for audio and video routing. |
+| preflight | Performs pre-installation tasks, such as creating directories and configuring USB Wi-Fi adapters. |
+| razer |  Configures Razer peripherals and accessories. |
+| steam | Installs and configures Steam for gaming. |
+| telegram | Installs and configures the Telegram desktop client. |
+| vscode | Installs and configures Visual Studio Code for development. |
+
 ## 📸 Screenshots
 
 ### Cursor Editor & Terminals
@@ -82,47 +107,11 @@ Welcome to the Ansible Setup Project! This project is designed to automate the s
 ### Yazi
 ![Yazi](./assets/yazi.png)
 
-## 🛠️ Roles and Playbooks
-
-### Alacritty
-- Configuration files are located in `roles/alacritty/files/alacritty.yml`.
-- Tasks are defined in `roles/alacritty/tasks/main.yaml`.
-
-### Feh
-- Files in `roles/feh/files` contain wallpapers including `wallpaper.jpg`.
-- Tasks are defined in `roles/feh/tasks/main.yaml`.
-
-### i3
-- Window manager configurations are in `roles/i3/files/config`.
-- Tasks are executed as per `roles/i3/tasks/main.yaml`.
-- Installs my custom Cyberfunk77 theme made from scratch by yours truly.
-
-### Packages
-- Essential packages are managed through `roles/packages/tasks/main.yaml`.
-
-### Picom
-- Configuration in `roles/picom/files/picom.conf`.
-- Tasks structure defined in `roles/picom/tasks/main.yaml`.
-
-### Rofi
-- UI configurations in `roles/rofi/files`.
-- The task definitions are in `roles/rofi/tasks/main.yaml`.
-
-### SSH
-- Task and handler configurations located in `roles/ssh`.
-
-### Zsh
-- Configurations for Zsh and Prezto managed via `roles/zsh/tasks`.
-
 ## ⚙️ Configuration
 
 - `ansible.cfg` contains the Ansible configuration settings.
 - `host_vars/localhost.yaml` provides host-specific variables.
 - Inventory hosts are defined in `inventory/hosts.yaml`.
-
-## ℹ️ Logs
-
-Logs for playbook runs can be found in `log/ansible.log`.
 
 ## ✨ How to use
 
@@ -132,7 +121,7 @@ Logs for playbook runs can be found in `log/ansible.log`.
 4. Run the playbooks using:
 
    ```sh
-   ansible-playbook main.yaml
+   ansible-playbook --ask-become-pass --inventory=inventory/hosts.yaml main.yaml --limit=local
    ```
 
 ## 📜 License

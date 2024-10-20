@@ -1,0 +1,68 @@
+---
+- name: Download IBM 3270 Nerd Font
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/3270.zip
+    dest: /tmp/3270.zip
+    mode: "0755"
+  changed_when: false
+
+- name: Extract IBM 3270 Nerd Font
+  ansible.builtin.unarchive:
+    src: /tmp/3270.zip
+    dest: "{{ logged_user_home }}/.local/share/fonts/"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Download ProFont Nerd Font
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/ProFont.zip
+    dest: /tmp/ProFont.zip
+    mode: "0755"
+  changed_when: false
+
+- name: Extract ProFront Nerd Font
+  ansible.builtin.unarchive:
+    src: /tmp/ProFont.zip
+    dest: "{{ logged_user_home }}/.local/share/fonts/"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Download Monofur Nerd Font
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Monofur.zip
+    dest: /tmp/Monofur.zip
+    mode: "0755"
+  changed_when: false
+
+- name: Extract Monofur Nerd Font
+  ansible.builtin.unarchive:
+    src: /tmp/Monofur.zip
+    dest: "{{ logged_user_home }}/.local/share/fonts/"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Download Hermit Nerd Font
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Hermit.zip
+    dest: /tmp/Hermit.zip
+    mode: "0755"
+  changed_when: false
+
+- name: Extract Hermit Nerd Font
+  ansible.builtin.unarchive:
+    src: /tmp/Hermit.zip
+    dest: "{{ logged_user_home }}/.local/share/fonts/"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Copy font.config file
+  ansible.builtin.copy:
+    src: font.conf
+    dest: "{{ logged_user_home }}/.config/fontconfig/fonts.conf"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"

@@ -32,20 +32,12 @@ colors:
 
 font:
   normal:
-    family: JetBrains Mono
-    style: Regular
-  size: 8
-
-cursor:
-  text: "0x000000"
-  cursor: "0x000000"
+    family: "ProFontWindows Nerd Font Mono"
+  size: 9.0
 
 scrolling:
   history: 10000
   multiplier: 3
-
-bell:
-  audible: false
 
 key_bindings:
   - { key: C, mods: Super, action: Copy }

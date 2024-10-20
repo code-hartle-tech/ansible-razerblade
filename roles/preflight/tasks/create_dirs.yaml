@@ -1,4 +1,18 @@
 ---
+- name: Create config directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0700"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  loop:
+    - "{{ logged_user_home }}/.local/share/fonts/"
+    - "{{ logged_user_home }}/.local/share/icons/"
+    - "{{ logged_user_home }}/.local/share/themes/"
+    - "{{ logged_user_home }}/.config/fontconfig/"
+    - "{{ logged_user_home }}/.config/volumeicon/"
+
 - name: Create directory structure
   ansible.builtin.file:
     path: "{{ item }}"

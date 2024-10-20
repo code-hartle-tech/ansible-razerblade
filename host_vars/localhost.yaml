@@ -24,6 +24,13 @@ essentials:
   - inotify-tools # Tools for monitoring and reacting to file system events
   - libc6 # The GNU C Library, the standard library for C programs
   - xz-utils # Tools for working with XZ compressed files
+  - blueman # Bluetooth management tool
+
+fonts:
+  - fonts-hack
+  - fonts-noto-color-emoji
+  - fonts-firacode
+  - fonts-terminus
 
 system:
   - htop # htop allows system-wide process listing and management
