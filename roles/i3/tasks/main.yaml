@@ -9,13 +9,13 @@
 
 # check i3 installation
 - name: Check if i3 is present
-  stat:
+  ansible.builtin.stat:
     path: "{{ logged_user_home }}/.i3-gaps"
   register: i3_gaps_dir
 
 # Clone i3-gaps repository
 - name: Clone i3-gaps repository
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/Airblader/i3.git"
     dest: "{{ logged_user_home }}/.i3-gaps"
     version: "gaps-next"
@@ -23,7 +23,7 @@
 
 # Build and install i3-gaps using Meson and Ninja
 - name: Build and install i3-gaps
-  shell: |
+  ansible.builtin.shell: |
     cd "{{ logged_user_home }}/.i3-gaps"
     rm -rf build/
     meson build --prefix=/usr --sysconfdir=/etc
@@ -35,7 +35,7 @@
 
 # Create i3 config directory
 - name: Create i3 config directory
-  file:
+  ansible.builtin.file:
     path: "{{ logged_user_home }}/.config/i3"
     state: directory
     mode: "0755"

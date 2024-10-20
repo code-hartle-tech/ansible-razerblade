@@ -1,0 +1,28 @@
+---
+- name: Ensure the /home/vz/.local/bin directory exists
+  ansible.builtin.file:
+    path: "{{ logged_user_home }}/.local/bin"
+    state: directory
+    mode: "0700"
+
+- name: Copy the rename-wifi.sh script
+  ansible.builtin.copy:
+    src: rename-wifi.sh
+    dest: "{{ logged_user_home }}/.local/bin/rename-wifi.sh"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Apply the udev rule template for renaming the wifi adapter
+  ansible.builtin.template:
+    src: 90-wifi-usb-rename-adapter.rules.j2
+    dest: /etc/udev/rules.d/90-wifi-usb-rename-adapter.rules
+    mode: "0644"
+
+- name: Reload udev rules
+  ansible.builtin.command: udevadm control --reload-rules
+  changed_when: false
+
+- name: Trigger udev rules
+  ansible.builtin.command: udevadm trigger
+  changed_when: false

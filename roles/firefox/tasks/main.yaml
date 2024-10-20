@@ -22,6 +22,7 @@
   ansible.builtin.command:
     cmd: "gpg --dry-run --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc"
   register: gpg_fingerprint_output
+  changed_when: false
 
 - name: Check for correct fingerprint
   ansible.builtin.debug:
@@ -45,7 +46,7 @@
 
 - name: Update APT cache
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
 
 - name: Install Firefox
   ansible.builtin.apt:

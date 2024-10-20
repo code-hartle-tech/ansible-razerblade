@@ -1,13 +1,13 @@
 ---
 - name: Ensure dependencies are installed
-  apt:
+  ansible.builtin.apt:
     name:
       - xserver-xorg-input-libinput
       - xdotool
       - wmctrl
       - libinput-tools
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Copy libinput touchpad configuration
   ansible.builtin.copy:
@@ -18,14 +18,15 @@
     group: "{{ logged_user }}"
 
 - name: Check if libinput-gestures is present
-  stat:
+  ansible.builtin.stat:
     path: "/usr/bin/libinput-gestures"
   register: libinput_gestures_installed
 
 - name: Clone libinput-gestures repository
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/bulletmark/libinput-gestures.git"
     dest: /tmp/libinput-gestures
+    version: master
   when: not libinput_gestures_installed.stat.exists
 
 - name: Install libinput-gestures
@@ -33,15 +34,16 @@
   args:
     chdir: /tmp/libinput-gestures
   when: not libinput_gestures_installed.stat.exists
+  changed_when: false
 
 - name: Add user to input group
-  user:
+  ansible.builtin.user:
     name: "{{ logged_user }}"
     groups: input
-    append: yes
+    append: true
 
 - name: Copy libinput-gestures configuration file
-  copy:
+  ansible.builtin.copy:
     src: libinput-gestures.conf
     dest: "{{ logged_user_home }}/.config/libinput-gestures.conf"
     owner: "{{ logged_user }}"
@@ -49,7 +51,7 @@
     mode: "0755"
 
 - name: Create libinput-gestures systemd service file
-  copy:
+  ansible.builtin.copy:
     content: |
       [Unit]
       Description=Libinput Gestures Service
@@ -70,15 +72,15 @@
     mode: "0755"
 
 - name: Reload systemd to recognize new service
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
 
 - name: Enable libinput-gestures service
-  systemd:
+  ansible.builtin.systemd:
     name: libinput-gestures
-    enabled: yes
+    enabled: true
 
 - name: Start libinput-gestures service
-  systemd:
+  ansible.builtin.systemd:
     name: libinput-gestures
     state: started

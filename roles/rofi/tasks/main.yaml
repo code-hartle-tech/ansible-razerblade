@@ -5,7 +5,7 @@
     state: present
 
 - name: Create Rofi config directory
-  file:
+  ansible.builtin.file:
     path: "{{ logged_user_home }}/.config/rofi"
     state: directory
     mode: "0700"
@@ -20,11 +20,5 @@
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
   loop:
-    - {
-        src: config.rasi,
-        dest: "{{ logged_user_home }}/.config/rofi/config.rasi",
-      }
-    - {
-        src: search.svg,
-        dest: "{{ logged_user_home }}/.config/rofi/search.svg",
-      }
+    - { src: config.rasi, dest: "{{ logged_user_home }}/.config/rofi/config.rasi" }
+    - { src: search.svg, dest: "{{ logged_user_home }}/.config/rofi/search.svg" }

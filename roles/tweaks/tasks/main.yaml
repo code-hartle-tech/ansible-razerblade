@@ -26,6 +26,7 @@
   ansible.builtin.lineinfile:
     path: "{{ logged_user_home }}/.zshrc"
     line: "[ -f ~/.aliases ] && . ~/.aliases"
-    create: yes
+    create: true
+    mode: "700"
     state: present
     insertafter: EOF

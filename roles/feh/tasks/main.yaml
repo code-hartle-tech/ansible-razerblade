@@ -5,7 +5,7 @@
     state: present
 
 - name: Create wallpapers directory
-  file:
+  ansible.builtin.file:
     path: "{{ logged_user_home }}/Pictures/Wallpapers"
     mode: "0755"
     owner: "{{ logged_user }}"
@@ -14,7 +14,7 @@
 
 # copy wallpaper from assets
 - name: Copy theme wallpaper
-  copy:
+  ansible.builtin.copy:
     src: "wallpaper.jpg"
     dest: "{{ logged_user_home }}/Pictures/Wallpapers/wallpaper.jpg"
     owner: "{{ logged_user }}"

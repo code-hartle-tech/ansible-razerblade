@@ -1,13 +1,14 @@
 ---
 - name: Run apt --fix-broken install to fix broken dependencies
-  command: apt --fix-broken install
+  ansible.builtin.command: apt --fix-broken install
   ignore_errors: true
   changed_when: false
   register: fix_broken
 
 - name: Ensure all packages are configured correctly
-  command: dpkg --configure -a
+  ansible.builtin.command: dpkg --configure -a
   when: fix_broken is failed
+  changed_when: false
 
 - name: Update and upgrade packages
   ansible.builtin.package:
@@ -47,6 +48,15 @@
 - name: Install drivers
   ansible.builtin.package:
     name: "{{ drivers }}"
+    state: present
+
+- name: Install utility Tools
+  ansible.builtin.package:
+    name: "{{ utility }}"
+    state: present
+- name: Install DevOps Tools
+  ansible.builtin.package:
+    name: "{{ devops }}"
     state: present
 
 - name: Remove useless packages

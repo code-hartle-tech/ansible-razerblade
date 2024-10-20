@@ -1,0 +1,5 @@
+---
+- name: Install minikube
+  ansible.builtin.package:
+    name: kubectx
+    state: present

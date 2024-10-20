@@ -1,0 +1,28 @@
+---
+- name: Install containerd
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/containerd.io_1.7.22-1_amd64.deb
+
+- name: Install Docker buildx plugin
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-buildx-plugin_0.17.1-1~debian.12~bookworm_amd64.deb
+
+- name: Install Docker CE CLI
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-ce-cli_27.3.1-1~debian.12~bookworm_amd64.deb
+
+- name: Install Docker rootless extras
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-ce-rootless-extras_27.3.1-1~debian.12~bookworm_amd64.deb
+
+- name: Install Docker CE
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-ce_27.3.1-1~debian.12~bookworm_amd64.deb
+
+- name: Install Docker Compose plugin
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-compose-plugin_2.29.7-1~debian.12~bookworm_amd64.deb
+
+- name: Install Docker Scan plugin
+  ansible.builtin.apt:
+    deb: https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-scan-plugin_0.23.0~debian-bookworm_amd64.deb

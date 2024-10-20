@@ -1,0 +1,15 @@
+---
+# Clone the repository if not already present
+- name: Clone the Razer laptop control repository
+  ansible.builtin.git:
+    repo: "git@github.com:Razer-Linux/razer-laptop-control-no-dkms.git"
+    dest: "/tmp/razer-laptop-control-no-dkms"
+    version: main
+    force: true
+
+# Run the installation script
+- name: Change directory and run install.sh
+  ansible.builtin.command: "./install.sh install"
+  args:
+    chdir: "/tmp/razer-laptop-control-no-dkms/razer_control_gui"
+  changed_when: false

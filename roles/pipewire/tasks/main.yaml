@@ -22,7 +22,10 @@
 
 # Step 2: Mask PulseAudio
 - name: Mask PulseAudio
-  ansible.builtin.command: systemctl --user mask pulseaudio
+  ansible.builtin.systemd:
+    name: pulseaudio
+    scope: user
+    masked: true
   become: true
   become_user: "{{ logged_user }}"
 

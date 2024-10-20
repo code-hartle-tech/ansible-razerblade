@@ -21,7 +21,9 @@ essentials:
   - xserver-xorg-input-synaptics # driver for the synaptics touchpad input device
   - xinput # xinput is a command-line utility for managing and configuring input devices connected to Linux systems.
   - libinput-tools # Input device driver and utility library for Linux
-  - inotify-tools
+  - inotify-tools # Tools for monitoring and reacting to file system events
+  - libc6 # The GNU C Library, the standard library for C programs
+  - xz-utils # Tools for working with XZ compressed files
 
 system:
   - htop # htop allows system-wide process listing and management
@@ -29,6 +31,8 @@ system:
 utility:
   - scrot # Tool for taking screenshots
   - grabc # Tool for color picking
+  - flameshot # Tool for taking screenshots and annotations
+  - peek # Tool for recording GIF animations
 
 network:
   - curl # Tool for making network requests (supports various protocols)
@@ -130,6 +134,9 @@ hacking:
 
 drivers:
   - libegl1-mesa-dev # Development files for the Mesa implementation of the EGL API, used for rendering graphics
+
+devops:
+  - ansible-lint # Tool for linting Ansible playbooks
 
 useless: # Packages that are non-essential, replaceable, or potentially insecure
   - cups # Common Unix Printing System; not needed if no printer is connected

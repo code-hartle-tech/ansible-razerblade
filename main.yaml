@@ -3,6 +3,7 @@
   hosts: local
   become: true
   roles:
+    - preflight
     - packages
     - ssh
     - zsh
@@ -14,9 +15,13 @@
     - tweaks
     - libinput
     - openrgb
-    - zed
+    - vscode
     - nvidia
     - ollama
     - steam
     - pipewire
     - firefox
+    - modules
+    - appeditor
+    - telegram
+    - devops

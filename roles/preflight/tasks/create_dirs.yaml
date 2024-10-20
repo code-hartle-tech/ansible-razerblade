@@ -1,0 +1,27 @@
+---
+- name: Create directory structure
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0700"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  loop:
+    - "{{ logged_user_home }}/Projects/"
+    - "{{ logged_user_home }}/Music/"
+    - "{{ logged_user_home }}/Pictures/"
+    - "{{ logged_user_home }}/Videos/"
+    - "{{ logged_user_home }}/Downloads/"
+
+- name: Create subdirectory structure
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0700"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  loop:
+    - "{{ logged_user_home }}/Projects/DevOps/"
+    - "{{ logged_user_home }}/Music/Metal/"
+    - "{{ logged_user_home }}/Pictures/Screenshots/"
+    - "{{ logged_user_home }}/Videos/Screencast/"

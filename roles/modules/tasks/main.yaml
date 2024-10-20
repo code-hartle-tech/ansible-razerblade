@@ -1,0 +1,41 @@
+---
+- name: Ensure dependencies are installed
+  ansible.builtin.apt:
+    name:
+      - dkms
+      - build-essential
+      - git
+    state: present
+    update_cache: true
+
+- name: Clone the rtl8812au driver repository
+  ansible.builtin.git:
+    repo: https://github.com/aircrack-ng/rtl8812au.git
+    version: v5.6.4.2
+    dest: /usr/src/rtl8812au
+    force: true
+
+- name: Add the rtl8812au driver to DKMS
+  ansible.builtin.command: dkms add /usr/src/rtl8812au
+  args:
+    creates: /var/lib/dkms/8812au
+
+- name: Build the rtl8812au driver with DKMS
+  ansible.builtin.command: dkms build 8812au/5.6.4.2
+  args:
+    creates: /var/lib/dkms/8812au
+
+- name: Install the rtl8812au driver with DKMS
+  ansible.builtin.command: dkms install 8812au/5.6.4.2
+  args:
+    creates: /var/lib/dkms/8812au
+
+- name: Load the 8812au driver
+  ansible.builtin.command: modprobe --force 88XXau
+  changed_when: false
+
+- name: Ensure the driver is loaded on boot
+  ansible.builtin.lineinfile:
+    path: /etc/modules
+    line: 88XXau
+    state: present

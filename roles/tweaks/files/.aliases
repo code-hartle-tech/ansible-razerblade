@@ -28,7 +28,7 @@ alias cpu='lscpu'                                 # Show CPU info
 alias mem='free -m'                               # Memory info in MB
 alias topm='ps aux --sort=-%mem | head'           # Top processes by memory
 alias topc='ps aux --sort=-%cpu | head'           # Top processes by CPU
-alias ip='curl ifconfig.me'                       # Get public IP address
+alias getip='curl ifconfig.me'                       # Get public IP address
 alias up='uptime -p'                              # Uptime in a readable format
 alias sys='uname -a'                              # System information
 alias hist='history | grep'                       # Search command history

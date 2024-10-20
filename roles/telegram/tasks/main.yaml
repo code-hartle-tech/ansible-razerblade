@@ -1,0 +1,50 @@
+---
+- name: Install requirements
+  ansible.builtin.package:
+    name:
+      - curl
+      - mawk
+      - tar
+
+- name: Create icon directory
+  ansible.builtin.file:
+    path: "{{ logged_user_home }}/.local/share/icons/hicolor/256x256/apps/"
+    state: directory
+    mode: "0700"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Copy Telegram icon
+  ansible.builtin.copy:
+    src: "telegram.png"
+    dest: "{{ logged_user_home }}/.local/share/icons/hicolor/256x256/apps/telegram.png"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Copy Telegram .desktop launcher
+  ansible.builtin.copy:
+    src: "telegram.desktop"
+    dest: "{{ logged_user_home }}/.local/share/applications/telegram.desktop"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Fetch latest release for Telegram # noqa: command-instead-of-module
+  ansible.builtin.shell: |
+    set -o pipefail &&
+    curl -s https://api.github.com/repos/telegramdesktop/tdesktop/releases/latest | grep browser_download_url | grep tar.xz | awk -F '"' '{print $4}'
+  register: telegram_latest_release_url
+  changed_when: false
+
+- name: Download Telegram installer
+  ansible.builtin.get_url:
+    url: "{{ telegram_latest_release_url.stdout }}"
+    dest: /tmp/telegram.tar.xz
+    mode: "0644"
+
+- name: Uncompress Telegram installer
+  ansible.builtin.unarchive:
+    src: /tmp/telegram.tar.xz
+    dest: /opt/
+    remote_src: true

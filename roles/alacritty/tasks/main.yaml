@@ -5,7 +5,7 @@
     state: present
 
 - name: Create Alacritty config directory
-  file:
+  ansible.builtin.file:
     path: "{{ logged_user_home }}/.config/alacritty"
     state: directory
     mode: '0755'
@@ -14,3 +14,4 @@
   ansible.builtin.copy:
     src: alacritty.yml
     dest: "{{ logged_user_home }}/.config/alacritty/"
+    mode: "0644"

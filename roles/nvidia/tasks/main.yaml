@@ -37,19 +37,22 @@
   ansible.builtin.get_url:
     url: "https://github.com/bayasdev/envycontrol/releases/download/v3.5.1/python3-envycontrol_3.5.1-1_all.deb"
     dest: "/tmp/python3-envycontrol_3.5.1-1_all.deb"
+    mode: "0755"
   when: not envycontrol_deb_file.stat.exists and not envycontrol_installed.stat.exists
+  changed_when: false
 
 - name: Install EnvyControl using dpkg (if not already installed)
-  ansible.builtin.command: dpkg -i /tmp/python3-envycontrol_3.5.1-1_all.deb
-  args:
-    chdir: /tmp
+  ansible.builtin.apt:
+    deb: /tmp/python3-envycontrol_3.5.1-1_all.deb
   when: not envycontrol_installed.stat.exists
   register: dpkg_output
   ignore_errors: true
 
 - name: Ensure dependencies are installed after dpkg (if needed)
-  ansible.builtin.command: apt-get install -f -y
+  ansible.builtin.package:
+    state: fixed
   when: dpkg_output is defined and 'rc' in dpkg_output and dpkg_output.rc != 0
+  changed_when: false
 
 - name: Check current graphics mode using EnvyControl
   ansible.builtin.command: envycontrol -q
@@ -63,16 +66,13 @@
 - name: Switch to hybrid mode using EnvyControl (if not already in hybrid mode)
   ansible.builtin.command: envycontrol --switch hybrid
   when: "'hybrid' not in envycontrol_status.stdout"
+  changed_when: false
 
 - name: Copy screen extension scripts
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ logged_user_home }}/.local/bin/"
     force: true
+    mode: "0755"
   with_fileglob:
     - "files/*"
-#
-# - name: Reboot the machine to apply changes
-#   ansible.builtin.reboot:
-#     msg: "Rebooting to apply NVIDIA driver and hybrid graphics changes"
-#     pre_reboot_delay: 5

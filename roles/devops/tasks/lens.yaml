@@ -1,0 +1,4 @@
+---
+- name: Install Lens
+  ansible.builtin.command: snap install kontena-lens --classic
+  changed_when: false

@@ -1,0 +1,6 @@
+---
+- name: Create directory structures
+  ansible.builtin.include_tasks: create_dirs.yaml
+
+- name: Rename Alfa USB Adapter interface
+  ansible.builtin.include_tasks: usb_wifi.yaml

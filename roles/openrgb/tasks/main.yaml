@@ -1,12 +1,12 @@
 ---
 - name: Check if OpenRGB is already installed
-  shell: "[ -f /usr/bin/openrgb ]"
+  ansible.builtin.shell: "[ -f /usr/bin/openrgb ]"
   register: openrgb_installed
   changed_when: false
   failed_when: false
 
 - name: Install OpenRGB dependencies
-  ansible.legacy.package:
+  ansible.builtin.package:
     name:
       - libhidapi-hidraw0
       - libqt5core5a
@@ -14,7 +14,7 @@
       - libqt5widgets5
       - openrazer-driver-dkms
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Download OpenRGB
   ansible.builtin.get_url:
@@ -28,6 +28,7 @@
 - name: Install OpenRGB
   ansible.builtin.command: dpkg -i /tmp/openrgb.deb
   when: openrgb_installed.rc != 0
+  changed_when: false
 
 - name: Create OpenRGB profile directory
   ansible.builtin.file:

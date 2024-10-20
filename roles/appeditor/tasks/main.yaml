@@ -1,0 +1,4 @@
+---
+- name: Install AppEditor
+  ansible.builtin.command: flatpak install --assumeyes flathub com.github.donadigo.appeditor
+  changed_when: false

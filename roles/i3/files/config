@@ -11,7 +11,7 @@ font pango:JetBrains Mono 10
 gaps inner 20
 gaps outer 25
 #smart_borders off
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 0 
 
 # ----------------------------------- Define Cyberpunk Color Scheme
 
@@ -96,7 +96,10 @@ bindsym $mod+Shift+e exit
 bindsym $mod+b bar mode toggle
 
 # Screenshot
-bindsym $mod+p exec scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png
+bindsym $mod+Control+3 exec flameshot screen --path ~/Pictures/Screenshots
+bindsym $mod+Control+4 exec flameshot gui
+bindsym $mod+Control+5 exec peek
+
 
 # Workspace Management
 # Define Workspaces with Icons (requires font with icons, e.g., Font Awesome)
