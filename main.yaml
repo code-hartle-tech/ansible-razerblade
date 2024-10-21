@@ -3,15 +3,15 @@
   hosts: local
   become: true
   roles:
-    - preflight
     # - packages
+    # - preflight
     # - ssh
     # - zsh
     # - alacritty
     # - feh
     # - picom
     # - rofi
-    - i3
+    # - i3
     # - tweaks
     # - libinput
     # - openrgb

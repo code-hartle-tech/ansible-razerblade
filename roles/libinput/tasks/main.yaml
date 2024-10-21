@@ -13,7 +13,7 @@
   ansible.builtin.copy:
     src: 40-libinput.conf
     dest: /etc/X11/xorg.conf.d/40-libinput.conf
-    mode: "0755"
+    mode: "0644"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
 
@@ -48,7 +48,7 @@
     dest: "{{ logged_user_home }}/.config/libinput-gestures.conf"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
-    mode: "0755"
+    mode: "0644"
 
 - name: Create libinput-gestures systemd service file
   ansible.builtin.copy:
@@ -62,14 +62,14 @@
       ExecStart=/usr/bin/libinput-gestures
       Restart=on-failure
       User={{ logged_user }}
-      Environment=DISPLAY=:1
+      Environment=DISPLAY=:0
 
       [Install]
       WantedBy=default.target
     dest: /etc/systemd/system/libinput-gestures.service
     owner: root
     group: root
-    mode: "0755"
+    mode: "0644"
 
 - name: Reload systemd to recognize new service
   ansible.builtin.systemd:

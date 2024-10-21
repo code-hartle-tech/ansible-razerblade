@@ -181,7 +181,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 # ----------------------------------- Startup Applications
 
 # Launch Picom with Animation and Transparency Config
-exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Set Wallpaper with Feh
 exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg

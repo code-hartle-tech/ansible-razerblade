@@ -18,15 +18,15 @@
 - name: Add the rtl8812au driver to DKMS
   ansible.builtin.command: dkms add /usr/src/rtl8812au
   args:
-    creates: /var/lib/dkms/8812au
+    creates: /var/lib/dkms/realtek-rtl88xxau
 
 - name: Build the rtl8812au driver with DKMS
-  ansible.builtin.command: dkms build 8812au/5.6.4.2
+  ansible.builtin.command: dkms build realtek-rtl88xxau/5.6.4.2~20240509
   args:
     creates: /var/lib/dkms/8812au
 
 - name: Install the rtl8812au driver with DKMS
-  ansible.builtin.command: dkms install 8812au/5.6.4.2
+  ansible.builtin.command: dkms install realtek-rtl88xxau/5.6.4.2~20240509
   args:
     creates: /var/lib/dkms/8812au
 

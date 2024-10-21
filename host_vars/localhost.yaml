@@ -25,6 +25,11 @@ essentials:
   - libc6 # The GNU C Library, the standard library for C programs
   - xz-utils # Tools for working with XZ compressed files
   - blueman # Bluetooth management tool
+  - snapd # Package manager for managing snaps, a lightweight app packaging system
+  - flatpak # Package manager for managing Flatpak applications
+  - zip # Utility to manage ZIP-compressed files
+  - unzip # Utility to extract ZIP-compressed files
+  - alsa-utils # Utilities for ALSA (Advanced Linux Sound Architecture)
 
 fonts:
   - fonts-hack

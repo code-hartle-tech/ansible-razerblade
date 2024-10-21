@@ -1,0 +1,10 @@
+---
+- name: Get current kernel version
+  ansible.builtin.command: uname -r
+  register: kernel_version
+  changed_when: false
+
+- name: Install headers for current kernel
+  ansible.builtin.apt:
+    name: "linux-headers-{{ kernel_version.stdout }}"
+    state: present

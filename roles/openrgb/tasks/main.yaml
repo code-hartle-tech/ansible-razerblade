@@ -34,13 +34,21 @@
   ansible.builtin.file:
     path: "{{ logged_user_home }}/.config/OpenRGB"
     state: directory
-    mode: "0700"
+    mode: "0755"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
 
 - name: Copy OpenRGB Cyberfunk profile
   ansible.builtin.copy:
     src: Cyberfunk77.orp
+    dest: "{{ logged_user_home }}/.config/OpenRGB"
+    mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: Copy OpenRGB configuration file
+  ansible.builtin.copy:
+    src: OpenRGB.json
     dest: "{{ logged_user_home }}/.config/OpenRGB"
     mode: "0644"
     owner: "{{ logged_user }}"

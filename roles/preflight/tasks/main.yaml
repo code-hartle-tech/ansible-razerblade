@@ -1,4 +1,7 @@
 ---
+- name: Install headers
+  ansible.builtin.include_tasks: headers.yaml
+
 - name: Create directory structures
   ansible.builtin.include_tasks: create_dirs.yaml
 

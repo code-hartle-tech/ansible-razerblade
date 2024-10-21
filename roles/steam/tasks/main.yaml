@@ -37,7 +37,6 @@
   ansible.builtin.apt:
     name:
       - libgl1-mesa-dri:i386
-      - libgl1-mesa-glx:i386
       - libc6:i386
       - libgl1:i386
       - libdrm2:i386
@@ -48,7 +47,7 @@
   ansible.builtin.package:
     name:
       - steam-launcher
-      - steam-devices
+      # - steam-devices
       - steam-libs
       - steam-libs-amd64
       - steam-libs-i386

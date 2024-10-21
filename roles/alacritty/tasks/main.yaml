@@ -8,10 +8,17 @@
   ansible.builtin.file:
     path: "{{ logged_user_home }}/.config/alacritty"
     state: directory
-    mode: '0755'
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
 
 - name: Copy Alacritty configuration
   ansible.builtin.copy:
-    src: alacritty.yml
+    src: "{{ item }}"
     dest: "{{ logged_user_home }}/.config/alacritty/"
     mode: "0644"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+  loop:
+    - alacritty.yml
+    - alacritty.toml

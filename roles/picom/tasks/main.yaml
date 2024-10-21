@@ -8,7 +8,7 @@
   ansible.builtin.file:
     path: "{{ logged_user_home }}/.config/picom"
     state: directory
-    mode: "0700"
+    mode: "0755"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
 

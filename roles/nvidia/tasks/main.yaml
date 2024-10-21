@@ -16,8 +16,12 @@
     mode: "0755"
   when: not nvidia_driver_file.stat.exists and not nvidia_driver_installed.stat.exists
 
+- name: Remove nouveau module from running system
+  ansible.builtin.command: modprobe --remove nouveau
+  changed_when: false
+
 - name: Install the NVIDIA driver (if not already installed)
-  ansible.builtin.command: sh /tmp/NVIDIA-Linux-x86_64-550.120.run --silent --no-cc-version-check
+  ansible.builtin.command: sh /tmp/NVIDIA-Linux-x86_64-550.120.run --silent --no-cc-version-check --no-drm
   args:
     chdir: /tmp
     creates: /usr/bin/nvidia-smi

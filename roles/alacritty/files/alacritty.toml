@@ -1,0 +1,51 @@
+[colors.bright]
+black = "0x3a3a3a"
+blue = "0x6efeff"
+cyan = "0x5fffea"
+green = "0xeaffcc"
+magenta = "0xff66d9"
+red = "0xffff00"
+white = "0xffffff"
+yellow = "0xffff66"
+
+[colors.normal]
+black = "0x020314"
+blue = "0x37ebf3"
+cyan = "0x1ac5b0"
+green = "0xddffaa"
+magenta = "0xe455ae"
+red = "0xfdf500"
+white = "0xffffff"
+yellow = "0xfdf500"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xd1c5c0"
+
+[font]
+size = 9.0
+
+[font.normal]
+family = "ProFontWindows Nerd Font Mono"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Super"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[window]
+decorations = "none"
+opacity = 0.85
+
+[window.padding]
+x = 10
+y = 10

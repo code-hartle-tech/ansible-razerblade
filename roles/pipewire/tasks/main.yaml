@@ -20,34 +20,6 @@
     state: present
     update_cache: true
 
-# Step 2: Mask PulseAudio
-- name: Mask PulseAudio
-  ansible.builtin.systemd:
-    name: pulseaudio
-    scope: user
-    masked: true
-  become: true
-  become_user: "{{ logged_user }}"
-
-# Step 3: Enable and start PipeWire services
-- name: Start and enable PipeWire
-  ansible.builtin.systemd:
-    name: pipewire
-    scope: user
-    enabled: true
-    state: started
-  become: true
-  become_user: "{{ logged_user }}"
-
-- name: Start and enable PipeWire Pulse
-  ansible.builtin.systemd:
-    name: pipewire-pulse
-    scope: user
-    enabled: true
-    state: started
-  become: true
-  become_user: "{{ logged_user }}"
-
 # Step 4: Install Flatpak (if not installed)
 - name: Ensure Flatpak is installed
   ansible.builtin.package:
@@ -65,11 +37,3 @@
   ansible.builtin.command: flatpak install -y flathub org.pipewire.Helvum
   args:
     creates: /var/lib/flatpak/app/org.pipewire.Helvum
-
-- name: Copy Helvum .desktop file
-  ansible.builtin.copy:
-    src: Helvum.desktop
-    dest: "{{ logged_user_home }}/.local/share/applications/Helvum.desktop"
-    mode: "0755"
-    owner: "{{ logged_user }}"
-    group: "{{ logged_user }}"

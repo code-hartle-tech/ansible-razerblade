@@ -3,10 +3,11 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: "0700"
+    mode: "0755"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
   loop:
+    - "{{ logged_user_home }}/.local/share/applications/"
     - "{{ logged_user_home }}/.local/share/fonts/"
     - "{{ logged_user_home }}/.local/share/icons/"
     - "{{ logged_user_home }}/.local/share/themes/"
@@ -17,7 +18,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: "0700"
+    mode: "0755"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
   loop:
@@ -31,7 +32,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: "0700"
+    mode: "0755"
     owner: "{{ logged_user }}"
     group: "{{ logged_user }}"
   loop:
