@@ -1,5 +1,5 @@
 become_pass
-log/
+log/ansible.log
 .vscode/
 main_local.yaml
 vault_pass.txt

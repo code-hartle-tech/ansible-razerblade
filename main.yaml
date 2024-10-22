@@ -1,26 +1,26 @@
 ---
-- name: Basic Linux Setup
+- name: Razer Blade Ansible Playbook
   hosts: local
   become: true
   roles:
-    # - packages
-    # - preflight
-    # - ssh
-    # - zsh
-    # - alacritty
-    # - feh
-    # - picom
-    # - rofi
-    # - i3
-    # - tweaks
-    # - libinput
-    # - openrgb
-    # - vscode
-    # - nvidia
-    # - ollama
-    # - steam
-    # - pipewire
-    # - firefox
-    # - modules
-    # - telegram
-    # - devops
+    - packages
+    - preflight
+    - ssh
+    - zsh
+    - alacritty
+    - feh
+    - picom
+    - rofi
+    - i3
+    - tweaks
+    - libinput
+    - openrgb
+    - vscode
+    - nvidia
+    - ollama
+    - steam
+    - pipewire
+    - firefox
+    - modules
+    - telegram
+    - devops
