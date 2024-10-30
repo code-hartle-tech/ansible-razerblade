@@ -1,0 +1,24 @@
+---
+- name: "Create Texts AppImage Directory"
+  ansible.builtin.file:
+    path: "/opt/Texts/"
+    state: directory
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: "Install Texts AppImage"
+  ansible.builtin.get_url:
+    url: "https://texts.com/api/install/linux/x64/latest.AppImage"
+    dest: "/opt/Texts/Texts.AppImage"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"
+
+- name: "Create Texts AppImage Desktop file"
+  ansible.builtin.copy:
+    src: "texts.desktop"
+    dest: "{{ logged_user_home }}/.local/share/applications/texts.desktop"
+    mode: "0755"
+    owner: "{{ logged_user }}"
+    group: "{{ logged_user }}"

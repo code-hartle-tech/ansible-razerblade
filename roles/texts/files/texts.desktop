@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Texts
+Exec=/opt/Texts/Texts.AppImage
+Type=Application
+Comment=The ultimate messaging app
+Categories=Network;Chat;
+MimeType=x-scheme-handler/texts;
