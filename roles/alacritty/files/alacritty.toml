@@ -23,7 +23,7 @@ background = "0x000000"
 foreground = "0xd1c5c0"
 
 [font]
-size = 9.0
+size = 14.0
 
 [font.normal]
 family = "ProFontWindows Nerd Font Mono"
