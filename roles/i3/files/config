@@ -1,19 +1,21 @@
-# ----------------------------------- Set Mod Key and Font
+# ===================================
+#           BASIC SETTINGS
+# ===================================
 
 set $mod Mod4
 set $mod1 Mod1
 set $mod2 Mod2
 set $mod3 Mod3
+
 font pango:JetBrains Mono 10
 
-# ----------------------------------- Gaps and Borders
+# ----------------------------------- Gaps and Borders (i3-gaps style works in Sway)
 
 gaps inner 20
 gaps outer 25
-#smart_borders off
-for_window [class=".*"] border pixel 0 
+for_window [class=".*"] border pixel 0
 
-# ----------------------------------- Define Cyberpunk Color Scheme
+# ----------------------------------- Cyberpunk Color Scheme
 
 set $black                #020314
 set $neon-yellow          #fdf500
@@ -27,24 +29,34 @@ set $inactive-bg          #1a1a1a
 set $inactive-text        #555555
 set $focused-border-color #800080
 
-# ----------------------------------- Window Colors
+# ----------------------------------- Window Colors (Sway supports same syntax)
 
 client.focused          $focused-border-color $black $neon-yellow $focused-border-color $focused-border-color
-client.focused_inactive $inactive-bg $black $inactive-text $black $inactive-text
-client.unfocused        $inactive-bg $black $inactive-text $black $inactive-text
-client.urgent           $neon-magenta $black $neon-magenta $neon-magenta $neon-magenta
+client.focused_inactive $inactive-bg          $black $inactive-text $black $inactive-text
+client.unfocused        $inactive-bg          $black $inactive-text $black $inactive-text
+client.urgent           $neon-magenta         $black $neon-magenta $neon-magenta $neon-magenta
 client.background       $black
 
-# ----------------------------------- i3bar Configuration
+# ===================================
+#               BAR
+# ===================================
+
+# Option 1: swaybar with a status command
+# (replace "waybar" below with "i3status" or your script if you prefer)
 
 bar {
-    # status_command i3status
-    i3bar_command i3bar --transparency
+    # Sway uses swaybar/waybar, not i3bar
+    # i3bar_command i3bar --transparency            # <-- REMOVED
     # status_command exec /home/vz/.config/i3status/mybar.sh
+
+    # If you're using waybar:
+    status_command waybar
+
     position bottom
     font pango:JetBrains Mono 10
     separator_symbol ·
     hidden_state hide
+
     colors {
         background #00000000
         statusline $black
@@ -56,7 +68,9 @@ bar {
     }
 }
 
-# ----------------------------------- Keybindings
+# ===================================
+#           KEYBINDINGS
+# ===================================
 
 # Launch Alacritty Terminal
 bindsym $mod+F1 exec alacritty
@@ -64,45 +78,46 @@ bindsym $mod+F1 exec alacritty
 # Close Focused Window
 bindsym $mod+q kill
 
-# Launch Rofi Application Launcher
+# Rofi (runs via XWayland – fine)
 bindsym $mod+d exec rofi -show drun -theme ~/.config/rofi/config.rasi
 
 # Toggle Fullscreen
-bindsym F11 fullscreen toggle
+bindsym F11 fullscreen
 
 # Window Navigation
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
 # Move Windows with Arrow Keys
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 # Resize Windows
-bindsym $mod+Ctrl+Left resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+Down resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+Up resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+Right resize grow width 10 px or 10 ppt
+bindsym $mod+Ctrl+Left  resize shrink width 10px
+bindsym $mod+Ctrl+Down  resize grow   height 10px
+bindsym $mod+Ctrl+Up    resize shrink height 10px
+bindsym $mod+Ctrl+Right resize grow   width 10px
 
-# Reload and Exit i3
-bindsym $mod+Shift+r restart
+# Reload and Exit (Sway equivalents)
+bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exit
 
-# Toggle i3bar Visibility
+# Toggle Bar Visibility
 bindsym $mod+b bar mode toggle
 
-# Screenshot
+# Screenshots (flameshot/peek via XWayland)
 bindsym $mod+Control+3 exec flameshot screen --path ~/Pictures/Screenshots
 bindsym $mod+Control+4 exec flameshot gui
 bindsym $mod+Control+5 exec peek
 
+# ===================================
+#          WORKSPACES
+# ===================================
 
-# Workspace Management
-# Define Workspaces with Icons (requires font with icons, e.g., Font Awesome)
 set $ws1 "1: "
 set $ws2 "2: "
 set $ws3 "3: "
@@ -138,55 +153,61 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
-# Additional Keybindings
-# Launch File Manager (Nemo)
+# ===================================
+#    APPS / UTILITIES / SYSTEM
+# ===================================
+
+# File Manager
 bindsym $mod+f exec nemo
 
-# Launch Browser (Firefox)
+# Browser
 bindsym $mod+$mod1+b exec firefox
 
-# Lock Screen (Requires i3lock)
-bindsym $mod+$mod1+Backspace exec i3lock -c 000000
+# Screen Lock (Wayland: swaylock instead of i3lock)
+bindsym $mod+$mod1+Backspace exec swaylock -f -c 000000
 
-# Extend Internal Screen via MiniDisplay Port
-bindsym $mod+$mod1+Up exec --no-startup-id ~/.local/bin/extend_display_minidp_above.sh
-bindsym $mod+$mod1+Down exec --no-startup-id ~/.local/bin/extend_display_minidp_below.sh
-bindsym $mod+$mod1+Left exec --no-startup-id ~/.local/bin/extend_display_minidp_left.sh
-bindsym $mod+$mod1+Right exec --no-startup-id ~/.local/bin/extend_display_minidp_right.sh
+# --------- DISPLAY MANAGEMENT (X11 SCRIPTS – LIKELY BROKEN ON WAYLAND)
 
-# Extend Internal Screen via HDMI Port
-bindsym $mod+$mod1+Control+Up exec --no-startup-id ~/.local/bin/extend_display_hdmi_above.sh
-bindsym $mod+$mod1+Control+Down exec --no-startup-id ~/.local/bin/extend_display_hdmi_below.sh
-bindsym $mod+$mod1+Control+Left exec --no-startup-id ~/.local/bin/extend_display_hdmi_left.sh
-bindsym $mod+$mod1+Control+Right exec --no-startup-id ~/.local/bin/extend_display_hdmi_right.sh
+# These probably use xrandr and won't work under Wayland.
+# Leaving them here commented as placeholders.
+#
+# bindsym $mod+$mod1+Up    exec --no-startup-id ~/.local/bin/extend_display_minidp_above.sh
+# bindsym $mod+$mod1+Down  exec --no-startup-id ~/.local/bin/extend_display_minidp_below.sh
+# bindsym $mod+$mod1+Left  exec --no-startup-id ~/.local/bin/extend_display_minidp_left.sh
+# bindsym $mod+$mod1+Right exec --no-startup-id ~/.local/bin/extend_display_minidp_right.sh
+#
+# bindsym $mod+$mod1+Control+Up    exec --no-startup-id ~/.local/bin/extend_display_hdmi_above.sh
+# bindsym $mod+$mod1+Control+Down  exec --no-startup-id ~/.local/bin/extend_display_hdmi_below.sh
+# bindsym $mod+$mod1+Control+Left  exec --no-startup-id ~/.local/bin/extend_display_hdmi_left.sh
+# bindsym $mod+$mod1+Control+Right exec --no-startup-id ~/.local/bin/extend_display_hdmi_right.sh
+#
+# bindsym $mod+$mod1+Shift+Up    exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_above.sh
+# bindsym $mod+$mod1+Shift+Down  exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_below.sh
+# bindsym $mod+$mod1+Shift+Left  exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_left.sh
+# bindsym $mod+$mod1+Shift+Right exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_right.sh
+#
+# bindsym $mod+$mod1+Control+p exec --no-startup-id ~/.local/bin/dettach_all_external_displays.sh
 
-# Extend Internal Screen via USB HDMI Dongle Port
-bindsym $mod+$mod1+Shift+Up exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_above.sh
-bindsym $mod+$mod1+Shift+Down exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_below.sh
-bindsym $mod+$mod1+Shift+Left exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_left.sh
-bindsym $mod+$mod1+Shift+Right exec --no-startup-id ~/.local/bin/extend_display_usb_hdmi_right.sh
-
-bindsym $mod+$mod1+Control+p exec --no-startup-id ~/.local/bin/dettach_all_external_displays.sh
-
-# Audio Controls (Requires amixer)
+# Audio (amixer still works if ALSA is there; otherwise you might want pamixer/pactl)
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioMute        exec amixer set Master toggle
 
-
-# Brightness Controls (Requires brightnessctl)
-bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+# Brightness (brightnessctl is Wayland-friendly)
+bindsym XF86MonBrightnessUp   exec brightnessctl s +10%
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
-# ----------------------------------- Startup Applications
+# ===================================
+#           STARTUP APPS
+# ===================================
 
-# Launch Picom with Animation and Transparency Config
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+# Compositor: NOT needed under Sway (Wayland compositor built-in)
+# exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
-# Set Wallpaper with Feh
-exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/wallpaper.jpg
+# Wallpaper: use swaybg instead of feh
+exec_always --no-startup-id swaybg -i ~/Pictures/Wallpapers/wallpaper.jpg -m fill
 
-# Network Manager Applet
+# Network Manager Applet (runs under XWayland)
 exec_always --no-startup-id nm-applet
 
 # Volume Icon
@@ -195,5 +216,5 @@ exec --no-startup-id volumeicon
 # Bluetooth Icon
 exec_always --no-startup-id blueman-applet
 
-# OpenRGB
+# OpenRGB (X11 app – XWayland, fine)
 exec --no-startup-id openrgb --gui --startminimized --profile ~/.config/OpenRGB/Cyberfunk77.orp > /dev/null &
